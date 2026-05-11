@@ -22,3 +22,6 @@ Thumbs.db
 
 # Outputs (regenerables)
 outputs/figures/*.png
+
+# Cache
+cache/
