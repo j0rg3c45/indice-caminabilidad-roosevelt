@@ -156,12 +156,13 @@ Criterios en `data/external/parametros_territorio_espejo.txt`:
 
 ## Tecnologías
 
-- **uv** — Gestor de paquetes y entornos virtuales
+- **Jupyter Notebook / Google Colab** — Entorno principal de desarrollo y análisis
+- **uv** — Gestor de paquetes y entornos virtuales (ejecución local)
 - **OSMnx** — Red peatonal desde OpenStreetMap
 - **GeoPandas** — Datos geoespaciales
 - **Folium** — Mapas interactivos (Esri Streets/Satélite, capas)
 - **Matplotlib** — Mapas estáticos
-- **Pandas** — Procesamiento tabular
+- **Pandas / NumPy** — Procesamiento tabular
 
 ---
 

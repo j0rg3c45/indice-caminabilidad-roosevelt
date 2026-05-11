@@ -139,13 +139,14 @@ Criterios documentados en `data/external/parametros_territorio_espejo.txt`:
 
 | Herramienta | Uso |
 |-------------|-----|
+| Jupyter Notebook / Google Colab | Entorno principal de desarrollo y análisis |
 | Python 3.10+ | Lenguaje principal |
-| uv | Gestor de paquetes y entornos virtuales |
+| uv | Gestor de paquetes y entornos virtuales (local) |
 | OSMnx 2.0 | Red peatonal desde OpenStreetMap |
 | GeoPandas | Datos geoespaciales |
 | Folium | Mapas interactivos (Esri Streets/Satélite, capas) |
 | Matplotlib | Mapas estáticos |
-| Pandas | Procesamiento tabular |
+| Pandas / NumPy | Procesamiento tabular |
 
 ---
 
