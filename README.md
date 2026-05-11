@@ -76,9 +76,9 @@ Este repositorio contiene el pipeline de análisis para:
 ```bash
 git clone https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
 cd indice-caminabilidad-roosevelt
-python -m venv .venv
+uv venv
 .venv\Scripts\activate
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 python notebooks_py/caminabilidad_roosevelt.py
 ```
 
