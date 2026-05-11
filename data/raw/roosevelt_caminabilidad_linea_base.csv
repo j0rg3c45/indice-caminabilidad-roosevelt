@@ -1,0 +1,2 @@
+fecha_medicion,poligono,area_m2,area_ha,intersecciones_peatonales,longitud_red_peatonal_km,longitud_promedio_segmento_m,densidad_calle_km_km2,nodos_osm,segmentos_osm,fuente,momento
+2026-05-11,Av. Roosevelt - Buffer 100m,429014.0,42.9,232,31.78,41.7,74.07,246,762,OpenStreetMap via OSMnx,linea_base_pre_intervencion

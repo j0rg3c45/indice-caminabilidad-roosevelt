@@ -1,0 +1,19 @@
+*Parámetros para selección del territorio espejo — Av. Roosevelt*
+
+Para garantizar comparabilidad en el diseño de evaluación de impacto,
+el territorio espejo debe cumplir los siguientes criterios:
+
+*Escala geográfica:* corredor vial de entre 500 y 700 metros de longitud.
+Buffer de 100 metros a cada lado del eje. Área resultante: 38–48 hectáreas.
+
+*Tipología urbana:* corredor de uso mixto comercial-residencial con actividad
+peatonal cotidiana. No vía arterial ni calle exclusivamente residencial.
+
+*Condición de intervención:* sin intervención física planificada ni en
+ejecución durante 2026–2028.
+
+*Validación técnica:* densidad de intersecciones entre 400–700 int/km²
+(calculada con OSMnx, buffer 100m, network_type='walk').
+
+*Datos mínimos:* área, intersecciones peatonales, longitud total de red,
+longitud promedio de segmento y densidad de calle (km/km²).

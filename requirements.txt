@@ -1,0 +1,17 @@
+# ==============================================================================
+# Caminabilidad Av. Roosevelt — Dependencias
+# ITT Cali Inteligente · Equipo de Gobierno de Datos
+# ==============================================================================
+
+# Análisis geoespacial
+osmnx==2.0.0
+geopandas==1.0.1
+shapely==2.0.6
+
+# Datos y visualización
+pandas==2.2.3
+matplotlib==3.9.2
+numpy==1.26.4
+
+# Utilidades
+networkx==3.4.2
