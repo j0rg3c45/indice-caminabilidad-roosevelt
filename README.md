@@ -1,9 +1,4 @@
-# 🚶 Índice de Caminabilidad — Av. Roosevelt, Cali
-
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
-![OSMnx](https://img.shields.io/badge/OSMnx-2.0-green)
-![Status](https://img.shields.io/badge/Estado-Línea%20Base-orange)
-![License](https://img.shields.io/badge/Licencia-ITT%20Cali-lightgrey)
+# Índice de Caminabilidad — Av. Roosevelt, Cali
 
 **ITT Cali Inteligente · Equipo de Gobierno de Datos**
 
@@ -13,7 +8,7 @@ OpenStreetMap como línea base pre-intervención.
 
 ---
 
-## 📋 Descripción
+## Descripción
 
 Este repositorio contiene el pipeline de análisis para:
 
@@ -25,7 +20,7 @@ Este repositorio contiene el pipeline de análisis para:
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 ├── data/
@@ -45,7 +40,7 @@ Este repositorio contiene el pipeline de análisis para:
 
 ---
 
-## 🚀 Cómo Ejecutar
+## Cómo Ejecutar
 
 ### Opción 1: Google Colab (recomendado para exploración)
 
@@ -75,7 +70,7 @@ python notebooks_py/caminabilidad_roosevelt.py \
 
 ---
 
-## 📊 Métricas Calculadas
+## Métricas Calculadas
 
 | Indicador | Valor (Línea Base) | Fecha |
 |-----------|-------------------|-------|
@@ -87,7 +82,7 @@ python notebooks_py/caminabilidad_roosevelt.py \
 
 ---
 
-## 🔬 Territorio Espejo (Control)
+## Territorio Espejo (Control)
 
 Los criterios para seleccionar el corredor de control están documentados en
 `data/external/parametros_territorio_espejo.txt`. Resumen:
@@ -99,7 +94,7 @@ Los criterios para seleccionar el corredor de control están documentados en
 
 ---
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **OSMnx** — Descarga y análisis de redes viales desde OpenStreetMap
 - **GeoPandas** — Manejo de datos geoespaciales
@@ -108,12 +103,12 @@ Los criterios para seleccionar el corredor de control están documentados en
 
 ---
 
-## 👥 Equipo
+## Equipo
 
 ITT Cali Inteligente — Equipo de Gobierno de Datos
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Uso interno ITT · Cali Inteligente. Todos los derechos reservados.
