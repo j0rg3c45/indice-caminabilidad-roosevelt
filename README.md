@@ -6,6 +6,8 @@ Proyecto de evaluación de impacto de la intervención urbana en Av. Roosevelt
 (Cali, Colombia). Calcula métricas de caminabilidad usando la red peatonal de
 OpenStreetMap como línea base pre-intervención.
 
+**Repositorio:** https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
+
 ---
 
 ## Descripción
@@ -15,8 +17,20 @@ Este repositorio contiene el pipeline de análisis para:
 1. Calcular indicadores de caminabilidad (intersecciones, densidad de red,
    longitud de segmentos) usando OSMnx.
 2. Establecer la **línea base** (mayo 2026) antes de la intervención física.
-3. Definir criterios para seleccionar un **territorio espejo** (grupo control).
-4. Permitir mediciones futuras comparables (2026–2028).
+3. Integrar datos geoespaciales complementarios (siniestros, hurtos, homicidios,
+   comparendos, sedes educativas, VBG, VIF).
+4. Generar mapas interactivos con capas de Google Streets y red peatonal OSM.
+5. Definir criterios para seleccionar un **territorio espejo** (grupo control).
+6. Permitir mediciones futuras comparables (2026–2028).
+
+---
+
+## Sistema de Referencia Geoespacial
+
+| Propósito | CRS | EPSG |
+|-----------|-----|------|
+| Trabajo general (visualización, OSMnx, Folium) | WGS84 | 4326 |
+| Cálculos de área y distancia | Colombia Bogotá Zone | 3116 |
 
 ---
 
@@ -24,68 +38,100 @@ Este repositorio contiene el pipeline de análisis para:
 
 ```
 ├── data/
-│   ├── raw/                  # Datos originales sin modificar
-│   ├── processed/            # Datos procesados listos para análisis
-│   └── external/             # Parámetros y documentos de referencia
-├── notebooks/                # Jupyter notebooks exploratorios (Colab)
-├── notebooks_py/             # Scripts .py limpios y modulares
-├── agent/                    # Pipeline automatizado / agente (futuro)
+│   ├── raw/                          # Copias de trabajo
+│   ├── processed/                    # Datos procesados
+│   ├── external/                     # Parámetros territorio espejo
+│   └── itt_roosevelt/Roosevelt/
+│       └── Geojson_Roosevelt/        # GeoJSON fuente (input principal)
+├── notebooks/
+│   └── caminabilidad_roosevelt_v2.ipynb  # Notebook principal
+├── notebooks_py/
+│   └── caminabilidad_roosevelt.py        # Script modular
+├── agent/
+│   ├── context/                      # Contexto del agente
+│   ├── knowledge_base/               # Base de conocimiento
+│   └── prompts/                      # Prompts del sistema
 ├── outputs/
-│   ├── results/              # CSVs con métricas calculadas
-│   └── figures/              # Mapas y gráficos generados
-├── docs/                     # Documentación y diagramas
-├── requirements.txt          # Dependencias del proyecto
-└── README.md                 # Este archivo
+│   ├── results/                      # CSVs y GeoJSON de resultados
+│   └── figures/                      # Mapas generados
+├── docs/
+│   └── referencia_proceso.md         # Documentación del proceso
+├── .gitignore
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
 ## Cómo Ejecutar
 
-### Opción 1: Google Colab (recomendado para exploración)
+### Google Colab (recomendado)
 
 1. Abrir `notebooks/caminabilidad_roosevelt_v2.ipynb` en Google Colab.
-2. Subir el archivo GeoJSON del polígono cuando se solicite.
-3. Ejecutar todas las celdas en orden.
+2. Ejecutar todas las celdas — el repo se clona automáticamente.
+3. Los mapas interactivos y resultados se generan inline.
 
-### Opción 2: Script local
+### Local
 
 ```bash
-# Clonar el repositorio
-git clone <url-del-repo>
-
-# Crear entorno virtual
+git clone https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
+cd indice-caminabilidad-roosevelt
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# .venv\Scripts\activate   # Windows
-
-# Instalar dependencias
+.venv\Scripts\activate
 pip install -r requirements.txt
-
-# Ejecutar el análisis
-python notebooks_py/caminabilidad_roosevelt.py \
-    --geojson data/raw/Geojson_tramos_Roosevelt_Buffer_100.geojson \
-    --nombre "Av. Roosevelt - Buffer 100m"
+python notebooks_py/caminabilidad_roosevelt.py
 ```
 
 ---
 
-## Métricas Calculadas
+## Pipeline del Notebook
 
-| Indicador | Valor (Línea Base) | Fecha |
-|-----------|-------------------|-------|
-| Área del polígono | 42.9 ha | 2026-05-11 |
-| Intersecciones peatonales | 232 | 2026-05-11 |
-| Longitud red peatonal | 31.78 km | 2026-05-11 |
-| Longitud promedio segmento | 41.7 m | 2026-05-11 |
-| Densidad de calle | 74.07 km/km² | 2026-05-11 |
+1. Instalación de dependencias
+2. Configuración de CRS (WGS84 trabajo / EPSG:3116 cálculos)
+3. Detección de entorno (Colab / local) y carga de datos
+4. Carga del polígono buffer 100m + validación CRS
+5. Descarga de red peatonal desde OpenStreetMap
+6. Cálculo de métricas + exportación red peatonal como GeoJSON
+7. Carga de datasets complementarios (normalizados a WGS84)
+8. Mapa estático de la red peatonal
+9. Mapa interactivo (Google Streets + red peatonal OSM + capas de datos)
+10. Indicadores complementarios (densidad por hectárea)
+11. Exportación de resultados a CSV
+12. Visualización del mapa como imagen
+
+---
+
+## Métricas de Línea Base (11 mayo 2026)
+
+| Indicador | Valor |
+|-----------|-------|
+| Área del polígono | 42.9 ha |
+| Intersecciones peatonales | 232 |
+| Longitud red peatonal | 31.78 km |
+| Longitud promedio segmento | 41.7 m |
+| Densidad de calle | 74.07 km/km² |
+
+---
+
+## Mapa Interactivo — Capas Disponibles
+
+**Capas base (se alternan):**
+- CartoDB Claro
+- Google Streets
+- Google Satélite
+- Google Híbrido
+
+**Capas de datos (se superponen):**
+- Red peatonal OSM (verde)
+- Tramos Roosevelt — eje del corredor (rojo)
+- Polígono intervención — buffer 100m (azul)
+- Siniestros, Comparendos, Homicidios, Hurtos, Sedes, VBG, VIF
 
 ---
 
 ## Territorio Espejo (Control)
 
-Los criterios para seleccionar el corredor de control están documentados en
-`data/external/parametros_territorio_espejo.txt`. Resumen:
+Criterios en `data/external/parametros_territorio_espejo.txt`:
 
 - Corredor de 500–700 m, buffer 100 m, área 38–48 ha
 - Uso mixto comercial-residencial
@@ -96,10 +142,11 @@ Los criterios para seleccionar el corredor de control están documentados en
 
 ## Tecnologías
 
-- **OSMnx** — Descarga y análisis de redes viales desde OpenStreetMap
-- **GeoPandas** — Manejo de datos geoespaciales
-- **Matplotlib** — Visualización de mapas
-- **Pandas** — Procesamiento de datos tabulares
+- **OSMnx** — Red peatonal desde OpenStreetMap
+- **GeoPandas** — Datos geoespaciales
+- **Folium** — Mapas interactivos (Google Streets, capas)
+- **Matplotlib** — Mapas estáticos
+- **Pandas** — Procesamiento tabular
 
 ---
 

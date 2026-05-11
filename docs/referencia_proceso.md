@@ -107,13 +107,18 @@ El notebook `caminabilidad_roosevelt_v2.ipynb` ejecuta:
 3. Detección de entorno (Colab clona el repo / local usa rutas relativas)
 4. Carga del polígono buffer 100m + validación CRS → WGS84
 5. Descarga de red peatonal desde OSM (requiere WGS84)
-6. Cálculo de métricas de caminabilidad
+6. Cálculo de métricas + exportación de red peatonal como GeoJSON
 7. Carga de datasets complementarios (todos normalizados a WGS84)
 8. Mapa estático de la red peatonal
-9. Mapa interactivo (Folium) con capas por dataset
+9. Mapa interactivo con:
+   - Capas base: CartoDB, Google Streets, Google Satélite, Google Híbrido
+   - Red peatonal OSM (verde, descargada de OpenStreetMap)
+   - Tramos Roosevelt — eje del corredor (rojo)
+   - Polígono de intervención buffer 100m (azul)
+   - Capas de datos: siniestros, comparendos, homicidios, hurtos, sedes, VBG, VIF
 10. Resumen de indicadores complementarios (densidad por ha)
 11. Exportación de resultados a CSV
-12. Descarga de archivos (solo Colab)
+12. Visualización del mapa como imagen en el notebook
 
 ---
 
@@ -173,6 +178,10 @@ python notebooks_py/caminabilidad_roosevelt.py
 | `dc1f322` | Rutas Colab actualizadas al nuevo repo |
 | `fd0cdf2` | Estructura agent/ + notebook ejemplo ITT |
 | `19e3681` | Fix ox.projection.default_crs (OSMnx 2.x) |
+| `f911430` | Celda 12 muestra mapa como imagen |
+| `2fdfe27` | Capas Google Streets/Satélite/Híbrido en mapa |
+| `1f95475` | Capa de tramos Roosevelt (eje) en mapa |
+| `34d6505` | Red peatonal OSM en mapa interactivo + export GeoJSON |
 
 ---
 
