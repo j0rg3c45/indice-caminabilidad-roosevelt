@@ -71,7 +71,7 @@ Este repositorio contiene el pipeline de análisis para:
 2. Ejecutar todas las celdas — el repo se clona automáticamente.
 3. Los mapas interactivos y resultados se generan inline.
 
-### Local
+### Local (con uv)
 
 ```bash
 git clone https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
@@ -79,7 +79,12 @@ cd indice-caminabilidad-roosevelt
 uv venv
 .venv\Scripts\activate
 uv pip install -r requirements.txt
-python notebooks_py/caminabilidad_roosevelt.py
+
+# Pipeline completo (red peatonal + métricas + mapa)
+uv run notebooks_py/caminabilidad_roosevelt.py
+
+# Solo descargar la red peatonal como GeoJSON
+uv run notebooks_py/descargar_red_peatonal.py
 ```
 
 ---
@@ -94,10 +99,19 @@ python notebooks_py/caminabilidad_roosevelt.py
 6. Cálculo de métricas + exportación red peatonal como GeoJSON
 7. Carga de datasets complementarios (normalizados a WGS84)
 8. Mapa estático de la red peatonal
-9. Mapa interactivo (Google Streets + red peatonal OSM + capas de datos)
+9. Mapa interactivo (Esri Streets/Satélite + red peatonal OSM + capas de datos)
 10. Indicadores complementarios (densidad por hectárea)
 11. Exportación de resultados a CSV
 12. Visualización del mapa como imagen
+
+---
+
+## Scripts Disponibles
+
+| Script | Comando | Descripción |
+|--------|---------|-------------|
+| `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo: descarga red, calcula métricas, genera mapa |
+| `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga la red peatonal y guarda GeoJSON |
 
 ---
 
@@ -142,9 +156,10 @@ Criterios en `data/external/parametros_territorio_espejo.txt`:
 
 ## Tecnologías
 
+- **uv** — Gestor de paquetes y entornos virtuales
 - **OSMnx** — Red peatonal desde OpenStreetMap
 - **GeoPandas** — Datos geoespaciales
-- **Folium** — Mapas interactivos (Google Streets, capas)
+- **Folium** — Mapas interactivos (Esri Streets/Satélite, capas)
 - **Matplotlib** — Mapas estáticos
 - **Pandas** — Procesamiento tabular
 

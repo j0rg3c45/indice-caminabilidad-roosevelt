@@ -137,14 +137,15 @@ Criterios documentados en `data/external/parametros_territorio_espejo.txt`:
 
 ## 8. Tecnologías
 
-| Herramienta | Versión | Uso |
-|-------------|---------|-----|
-| Python | 3.10+ | Lenguaje principal |
-| OSMnx | 2.0 | Red peatonal desde OpenStreetMap |
-| GeoPandas | 1.0+ | Datos geoespaciales |
-| Folium | — | Mapas interactivos |
-| Matplotlib | — | Mapas estáticos |
-| Pandas | — | Procesamiento tabular |
+| Herramienta | Uso |
+|-------------|-----|
+| Python 3.10+ | Lenguaje principal |
+| uv | Gestor de paquetes y entornos virtuales |
+| OSMnx 2.0 | Red peatonal desde OpenStreetMap |
+| GeoPandas | Datos geoespaciales |
+| Folium | Mapas interactivos (Esri Streets/Satélite, capas) |
+| Matplotlib | Mapas estáticos |
+| Pandas | Procesamiento tabular |
 
 ---
 
@@ -154,14 +155,19 @@ Criterios documentados en `data/external/parametros_territorio_espejo.txt`:
 1. Abrir `notebooks/caminabilidad_roosevelt_v2.ipynb` en Colab
 2. Ejecutar todas las celdas — el repo se clona automáticamente
 
-### Local
+### Local (con uv)
 ```bash
 git clone https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
 cd indice-caminabilidad-roosevelt
 uv venv
 .venv\Scripts\activate
 uv pip install -r requirements.txt
-python notebooks_py/caminabilidad_roosevelt.py
+
+# Pipeline completo (red peatonal + métricas + mapa)
+uv run notebooks_py/caminabilidad_roosevelt.py
+
+# Solo descargar la red peatonal como GeoJSON
+uv run notebooks_py/descargar_red_peatonal.py
 ```
 
 ---
