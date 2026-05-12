@@ -72,6 +72,7 @@ Ubicación: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/`
 |---------|-------------|
 | Geojson_tramos_Roosevelt_Buffer_100.geojson | Polígono de intervención (buffer 100m) |
 | Geojson_tramos_Roosevelt.geojson | Tramos del corredor sin buffer |
+| red_peatonal_osm_roosevelt.geojson | Red peatonal OSM (con todos los vértices, simplify=False) |
 | BD_SINIESTROS_2023_2025_COMUNA_BARRIO_4326_Roosevelt.geojson | Siniestros viales |
 | COMPARENDOS_2023_2025_Roosevelt.geojson | Comparendos de tránsito |
 | HOMICIDIOS_2023_2025_Roosevelt.geojson | Homicidios |
@@ -106,8 +107,8 @@ El notebook `caminabilidad_roosevelt_v2.ipynb` ejecuta:
 2. Configuración de CRS (WGS84 trabajo, EPSG:3116 cálculos)
 3. Detección de entorno (Colab clona el repo / local usa rutas relativas)
 4. Carga del polígono buffer 100m + validación CRS → WGS84
-5. Descarga de red peatonal desde OSM (requiere WGS84)
-6. Cálculo de métricas + exportación de red peatonal como GeoJSON
+5. Descarga de red peatonal desde OSM (simplify=False, conserva todos los vértices)
+6. Cálculo de métricas + exportación de red peatonal como GeoJSON en zona de estudio
 7. Carga de datasets complementarios (todos normalizados a WGS84)
 8. Mapa estático de la red peatonal
 9. Mapa interactivo con:

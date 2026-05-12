@@ -95,7 +95,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 2. Configuración de CRS (WGS84 trabajo / EPSG:3116 cálculos)
 3. Detección de entorno (Colab / local) y carga de datos
 4. Carga del polígono buffer 100m + validación CRS
-5. Descarga de red peatonal desde OpenStreetMap
+5. Descarga de red peatonal desde OpenStreetMap (simplify=False, conserva vértices)
 6. Cálculo de métricas + exportación red peatonal como GeoJSON
 7. Carga de datasets complementarios (normalizados a WGS84)
 8. Mapa estático de la red peatonal
@@ -110,8 +110,8 @@ uv run notebooks_py/descargar_red_peatonal.py
 
 | Script | Comando | Descripción |
 |--------|---------|-------------|
-| `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo: descarga red, calcula métricas, genera mapa |
-| `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga la red peatonal y guarda GeoJSON |
+| `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo: descarga red (con vértices), calcula métricas, genera mapa |
+| `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga la red peatonal con todos los vértices y guarda GeoJSON |
 
 ---
 
