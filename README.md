@@ -131,12 +131,18 @@ uv run notebooks_py/descargar_red_peatonal.py
 
 **Capas base (se alternan):**
 - CartoDB Claro
-- Google Streets
-- Google Satélite
-- Google Híbrido
+- OpenStreetMap
+- Esri Satélite
+- Google Streets (subdomains: mt0–mt3)
+- Google Satélite (subdomains: mt0–mt3)
+
+Nota: los tiles de Google usan el formato `http://{s}.google.com/vt/lyrs=...`
+con `subdomains=['mt0', 'mt1', 'mt2', 'mt3']` para compatibilidad con Folium/Leaflet.
 
 **Capas de datos (se superponen):**
-- Red peatonal OSM (verde)
+- Red peatonal OSM — líneas (verde)
+- Vértices de líneas — todos los puntos de cada segmento (oscuro)
+- Nodos (intersecciones) — puntos rojos
 - Tramos Roosevelt — eje del corredor (rojo)
 - Polígono intervención — buffer 100m (azul)
 - Siniestros, Comparendos, Homicidios, Hurtos, Sedes, VBG, VIF

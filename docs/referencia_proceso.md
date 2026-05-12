@@ -112,8 +112,11 @@ El notebook `caminabilidad_roosevelt_v2.ipynb` ejecuta:
 7. Carga de datasets complementarios (todos normalizados a WGS84)
 8. Mapa estático de la red peatonal
 9. Mapa interactivo con:
-   - Capas base: CartoDB, Google Streets, Google Satélite, Google Híbrido
-   - Red peatonal OSM (verde, descargada de OpenStreetMap)
+   - Capas base: CartoDB, OpenStreetMap, Esri Satélite, Google Streets, Google Satélite
+   - Nota: Google tiles usan `http://{s}.google.com/vt/lyrs=...` con subdomains `['mt0','mt1','mt2','mt3']`
+   - Red peatonal OSM — líneas con vértices (verde)
+   - Vértices de líneas — todos los puntos intermedios de cada segmento (oscuro)
+   - Nodos (intersecciones) — puntos rojos
    - Tramos Roosevelt — eje del corredor (rojo)
    - Polígono de intervención buffer 100m (azul)
    - Capas de datos: siniestros, comparendos, homicidios, hurtos, sedes, VBG, VIF
