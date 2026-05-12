@@ -69,8 +69,9 @@ def cargar_poligono(geojson_path: str):
 
 
 def descargar_red_peatonal(polygon):
-    """Descarga la red peatonal desde OSM (polígono en WGS84)."""
-    G = ox.graph_from_polygon(polygon, network_type="walk")
+    """Descarga la red peatonal desde OSM (polígono en WGS84).
+    simplify=False conserva todos los vértices intermedios de las líneas."""
+    G = ox.graph_from_polygon(polygon, network_type="walk", simplify=False)
     return G
 
 

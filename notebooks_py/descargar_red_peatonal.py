@@ -54,8 +54,9 @@ def main():
 
     # 3. Descargar red peatonal
     print("\n[3/4] Descargando red peatonal desde OpenStreetMap...")
-    G = ox.graph_from_polygon(polygon, network_type="walk")
+    G = ox.graph_from_polygon(polygon, network_type="walk", simplify=False)
     print(f"      Nodos: {len(G.nodes)} | Segmentos: {len(G.edges)}")
+    print("      Vértices intermedios conservados (simplify=False)")
 
     # 4. Exportar como GeoJSON
     print("\n[4/4] Exportando GeoJSON...")
