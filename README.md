@@ -103,7 +103,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 10. Indicadores complementarios (densidad por hectárea)
 11. Exportación de resultados a CSV
 12. Visualización del mapa como imagen
-13. Configuración de zonas espejo (Calle 5 y Calle 7)
+13. Configuración de zonas espejo (Calle 5 y Calle 7) — polígonos GeoJSON desde `data/Informacion_espejo/geojson_espejo_poligonos/`
 14. Cálculo de caminabilidad para cada espejo + conteo de eventos
 15. Comparación Roosevelt vs Espejo + validación de criterios
 16. Gráfico comparativo de conectividad (scatter plot)
@@ -119,7 +119,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 | `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga red peatonal y guarda GeoJSON |
 | `graficos_base_caminabilidad.py` | `uv run notebooks_py/graficos_base_caminabilidad.py` | 6 gráficos base de caminabilidad |
 | `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
-| `convertir_poligonos_espejo.py` | `uv run notebooks_py/convertir_poligonos_espejo.py` | Convierte polígonos espejo de .shp a .geojson (WGS84) |
+| `convertir_poligonos_espejo.py` | `uv run notebooks_py/convertir_poligonos_espejo.py` | Regenera polígonos espejo .geojson desde .shp (WGS84) |
 
 ---
 

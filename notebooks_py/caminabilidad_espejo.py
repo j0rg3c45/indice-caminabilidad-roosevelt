@@ -9,9 +9,9 @@ Datos procesados en:
   - data/processed/Filtro_Calle_5/geojson_filtrado_calle_5_area_Espejo_Bf100/
   - data/processed/Filtro_Calle_7/geojson_filtrado_calle_7_area_Espejo_Bf100/
 
-Polígonos espejo en:
-  - data/Informacion_espejo/info_shape/calle_5_area_Espejo_Bf100.shp
-  - data/Informacion_espejo/info_shape/calle_7_area_Espejo_Bf100.shp
+Polígonos espejo (GeoJSON) en:
+  - data/Informacion_espejo/geojson_espejo_poligonos/calle_5_area_Espejo_Bf100.geojson
+  - data/Informacion_espejo/geojson_espejo_poligonos/calle_7_area_Espejo_Bf100.geojson
 
 Uso:
     uv run notebooks_py/caminabilidad_espejo.py
@@ -39,7 +39,7 @@ logging.getLogger("pyogrio").setLevel(logging.ERROR)
 # Configuración
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-ESPEJO_SHAPE_DIR = PROJECT_ROOT / "data" / "Informacion_espejo" / "info_shape"
+ESPEJO_GEOJSON_DIR = PROJECT_ROOT / "data" / "Informacion_espejo" / "geojson_espejo_poligonos"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 RESULTS_DIR = PROJECT_ROOT / "outputs" / "results"
 IMG_DIR = PROJECT_ROOT / "outputs" / "figures"
@@ -48,14 +48,15 @@ CRS_WGS84 = "EPSG:4326"
 CRS_COLOMBIA = "EPSG:3116"
 
 
-# Zonas espejo — polígonos en info_shape/, datos en processed/
+# Zonas espejo — polígonos GeoJSON en geojson_espejo_poligonos/, datos en processed/
 ZONAS_ESPEJO = {
     "Calle 5": {
-        "poligono": ESPEJO_SHAPE_DIR / "calle_5_area_Espejo_Bf100.shp",
+        "poligono": ESPEJO_GEOJSON_DIR / "calle_5_area_Espejo_Bf100.geojson",
+        "linea": ESPEJO_GEOJSON_DIR / "calle_5_linea.geojson",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_5" / "geojson_filtrado_calle_5_area_Espejo_Bf100",
     },
     "Calle 7": {
-        "poligono": ESPEJO_SHAPE_DIR / "calle_7_area_Espejo_Bf100.shp",
+        "poligono": ESPEJO_GEOJSON_DIR / "calle_7_area_Espejo_Bf100.geojson",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_7" / "geojson_filtrado_calle_7_area_Espejo_Bf100",
     },
 }

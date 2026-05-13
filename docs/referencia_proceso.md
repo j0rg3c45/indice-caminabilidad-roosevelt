@@ -66,6 +66,7 @@ Reglas implementadas en el notebook:
 
 ## 4. Datos Geoespaciales Disponibles
 
+### Zona Roosevelt
 Ubicación: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/`
 
 | Archivo | Descripción |
@@ -193,6 +194,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 | `2fdfe27` | Capas Google Streets/Satélite/Híbrido en mapa |
 | `1f95475` | Capa de tramos Roosevelt (eje) en mapa |
 | `34d6505` | Red peatonal OSM en mapa interactivo + export GeoJSON |
+| *(pending)* | Polígonos espejo migrados de .shp a GeoJSON nativo |
 
 ---
 

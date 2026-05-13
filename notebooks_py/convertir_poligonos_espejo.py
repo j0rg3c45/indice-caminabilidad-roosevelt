@@ -1,13 +1,18 @@
 """
-Convierte los polígonos espejo de .shp a .geojson (WGS84)
-para que funcionen en Colab donde no se suben los .shp.
+Convierte los polígonos espejo de .shp a .geojson (WGS84).
+
+NOTA: Los polígonos GeoJSON ya están disponibles en:
+    data/Informacion_espejo/geojson_espejo_poligonos/
+
+Este script es útil solo si se necesita regenerar los GeoJSON
+a partir de los shapefiles originales en info_shape/.
 
 Uso:
     uv run notebooks_py/convertir_poligonos_espejo.py
 
 Genera:
-    data/processed/Filtro_Calle_5/calle_5_area_Espejo_Bf100.geojson
-    data/processed/Filtro_Calle_7/calle_7_area_Espejo_Bf100.geojson
+    data/Informacion_espejo/geojson_espejo_poligonos/calle_5_area_Espejo_Bf100.geojson
+    data/Informacion_espejo/geojson_espejo_poligonos/calle_7_area_Espejo_Bf100.geojson
 """
 
 import logging
@@ -21,18 +26,18 @@ logging.getLogger("pyogrio").setLevel(logging.ERROR)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 ESPEJO_SHAPE_DIR = PROJECT_ROOT / "data" / "Informacion_espejo" / "info_shape"
-PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+ESPEJO_GEOJSON_DIR = PROJECT_ROOT / "data" / "Informacion_espejo" / "geojson_espejo_poligonos"
 
 CRS_WGS84 = "EPSG:4326"
 
 POLIGONOS = {
     "Calle 5": {
         "shp": ESPEJO_SHAPE_DIR / "calle_5_area_Espejo_Bf100.shp",
-        "geojson": PROCESSED_DIR / "Filtro_Calle_5" / "calle_5_area_Espejo_Bf100.geojson",
+        "geojson": ESPEJO_GEOJSON_DIR / "calle_5_area_Espejo_Bf100.geojson",
     },
     "Calle 7": {
         "shp": ESPEJO_SHAPE_DIR / "calle_7_area_Espejo_Bf100.shp",
-        "geojson": PROCESSED_DIR / "Filtro_Calle_7" / "calle_7_area_Espejo_Bf100.geojson",
+        "geojson": ESPEJO_GEOJSON_DIR / "calle_7_area_Espejo_Bf100.geojson",
     },
 }
 
@@ -40,6 +45,8 @@ POLIGONOS = {
 def main():
     print("Convirtiendo polígonos espejo .shp → .geojson (WGS84)")
     print()
+
+    ESPEJO_GEOJSON_DIR.mkdir(parents=True, exist_ok=True)
 
     for nombre, rutas in POLIGONOS.items():
         if not rutas["shp"].exists():
@@ -52,7 +59,6 @@ def main():
         elif gdf.crs.to_epsg() != 4326:
             gdf = gdf.to_crs(CRS_WGS84)
 
-        rutas["geojson"].parent.mkdir(parents=True, exist_ok=True)
         gdf.to_file(rutas["geojson"], driver="GeoJSON")
         print(f"  ✓ {nombre}: {rutas['geojson'].name} ({len(gdf)} features)")
 
