@@ -130,7 +130,8 @@ El notebook `caminabilidad_roosevelt_v2.ipynb` ejecuta:
    - Tramos Roosevelt — eje del corredor (rojo)
    - Polígono de intervención buffer 100m (azul)
    - Capas de datos: siniestros, comparendos, homicidios, hurtos, sedes, VBG, VIF
-10. Resumen de indicadores complementarios (densidad por ha)
+10. Indicadores complementarios Roosevelt + zonas espejo (red peatonal + eventos por dataset)
+10B. Gráfico comparativo barras: Roosevelt vs Calle 5 vs Calle 7 (total + densidad/ha)
 11. Exportación de resultados a CSV
 12. Visualización del mapa como imagen en el notebook
 

@@ -99,13 +99,14 @@ uv run notebooks_py/descargar_red_peatonal.py
 6. Cálculo de métricas + exportación red peatonal como GeoJSON
 7. Carga de datasets complementarios (normalizados a WGS84)
 8. Mapa estático de la red peatonal
-9. Mapa interactivo (Esri/Google Streets + red peatonal OSM + capas de datos)
-10. Indicadores complementarios (densidad por hectárea)
+9. Mapa interactivo (Esri/Google Streets + red peatonal OSM + capas datos + polígonos espejo)
+10. Indicadores complementarios Roosevelt + zonas espejo (red peatonal + eventos)
+10B. Gráfico comparativo barras: Roosevelt vs Calle 5 vs Calle 7 (total + densidad/ha)
 11. Exportación de resultados a CSV
 12. Visualización del mapa como imagen
-13. Configuración de zonas espejo (Calle 5 y Calle 7) — polígonos GeoJSON desde `data/Informacion_espejo/geojson_espejo_poligonos/`
+13. Configuración de zonas espejo — descomprime `geojson_espejo_poligonos.zip` automáticamente
 14. Cálculo de caminabilidad para cada espejo + conteo de eventos
-15. Comparación Roosevelt vs Espejo + validación de criterios
+15. Comparación Roosevelt vs Espejo + validación de criterios (400-700 int/km²)
 16. Gráfico comparativo de conectividad (scatter plot)
 17. Exportación de CSVs comparativos
 
@@ -118,6 +119,8 @@ uv run notebooks_py/descargar_red_peatonal.py
 | `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo Roosevelt: red peatonal + métricas + mapa |
 | `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga red peatonal y guarda GeoJSON |
 | `graficos_base_caminabilidad.py` | `uv run notebooks_py/graficos_base_caminabilidad.py` | 6 gráficos base de caminabilidad |
+| `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
+| `convertir_poligonos_espejo.py` | `uv run notebooks_py/convertir_poligonos_espejo.py` | Convierte polígonos espejo de .shp a .geojson |
 | `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
 | `convertir_poligonos_espejo.py` | `uv run notebooks_py/convertir_poligonos_espejo.py` | Regenera polígonos espejo .geojson desde .shp (WGS84) |
 
