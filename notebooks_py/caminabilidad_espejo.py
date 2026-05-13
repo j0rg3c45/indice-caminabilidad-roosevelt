@@ -50,11 +50,11 @@ CRS_COLOMBIA = "EPSG:3116"
 # Zonas espejo
 ZONAS_ESPEJO = {
     "Calle 5": {
-        "poligono": ESPEJO_SHAPE_DIR / "calle_5_area_Espejo_Bf100.shp",
+        "poligono": PROCESSED_DIR / "Filtro_Calle_5" / "calle_5_area_Espejo_Bf100.geojson",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_5" / "geojson_filtrado_calle_5_area_Espejo_Bf100",
     },
     "Calle 7": {
-        "poligono": ESPEJO_SHAPE_DIR / "calle_7_area_Espejo_Bf100.shp",
+        "poligono": PROCESSED_DIR / "Filtro_Calle_7" / "calle_7_area_Espejo_Bf100.geojson",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_7" / "geojson_filtrado_calle_7_area_Espejo_Bf100",
     },
 }

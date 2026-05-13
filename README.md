@@ -119,6 +119,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 | `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga red peatonal y guarda GeoJSON |
 | `graficos_base_caminabilidad.py` | `uv run notebooks_py/graficos_base_caminabilidad.py` | 6 gráficos base de caminabilidad |
 | `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
+| `convertir_poligonos_espejo.py` | `uv run notebooks_py/convertir_poligonos_espejo.py` | Convierte polígonos espejo de .shp a .geojson (WGS84) |
 
 ---
 
