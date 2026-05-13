@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Sincronizar docs y scripts",
+  "description": "Cuando se edita el notebook principal, recuerda actualizar los archivos .md (README, referencia_proceso) y los scripts .py correspondientes para mantener todo sincronizado.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.ipynb"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "El notebook fue modificado. Revisa si los cambios requieren actualizar: 1) README.md (pipeline, capas, métricas), 2) docs/referencia_proceso.md (historial, pipeline), 3) scripts .py en notebooks_py/ (funciones equivalentes). Si hay cambios relevantes, actualiza esos archivos, haz commit y push."
+  },
+  "workspaceFolderName": "Indice_Caminabilidad",
+  "shortName": "sync-docs-scripts"
+}

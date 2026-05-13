@@ -30,3 +30,11 @@
 - Google tiles en Folium: usar `http://{s}.google.com/vt/lyrs=...` con `subdomains=['mt0','mt1','mt2','mt3']`
 - Silenciar warnings de pyogrio: `logging.getLogger('pyogrio').setLevel(logging.ERROR)`
 - El notebook funciona en Colab (clona el repo) y en local (rutas relativas)
+
+## Reglas de sincronización
+- Cada vez que se modifique el notebook (.ipynb), actualizar también:
+  - README.md (pipeline, capas, métricas, scripts)
+  - docs/referencia_proceso.md (pipeline, historial de commits)
+  - Scripts .py en notebooks_py/ (funciones equivalentes al notebook)
+- Siempre hacer commit y push después de los cambios
+- No esperar a que el usuario lo pida — hacerlo automáticamente

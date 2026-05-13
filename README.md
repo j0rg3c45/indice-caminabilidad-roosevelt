@@ -99,10 +99,15 @@ uv run notebooks_py/descargar_red_peatonal.py
 6. Cálculo de métricas + exportación red peatonal como GeoJSON
 7. Carga de datasets complementarios (normalizados a WGS84)
 8. Mapa estático de la red peatonal
-9. Mapa interactivo (Esri Streets/Satélite + red peatonal OSM + capas de datos)
+9. Mapa interactivo (Esri/Google Streets + red peatonal OSM + capas de datos)
 10. Indicadores complementarios (densidad por hectárea)
 11. Exportación de resultados a CSV
 12. Visualización del mapa como imagen
+13. Configuración de zonas espejo (Calle 5 y Calle 7)
+14. Cálculo de caminabilidad para cada espejo + conteo de eventos
+15. Comparación Roosevelt vs Espejo + validación de criterios
+16. Gráfico comparativo de conectividad (scatter plot)
+17. Exportación de CSVs comparativos
 
 ---
 
@@ -110,8 +115,10 @@ uv run notebooks_py/descargar_red_peatonal.py
 
 | Script | Comando | Descripción |
 |--------|---------|-------------|
-| `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo: descarga red (con vértices), calcula métricas, genera mapa |
-| `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga la red peatonal con todos los vértices y guarda GeoJSON |
+| `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo Roosevelt: red peatonal + métricas + mapa |
+| `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga red peatonal y guarda GeoJSON |
+| `graficos_base_caminabilidad.py` | `uv run notebooks_py/graficos_base_caminabilidad.py` | 6 gráficos base de caminabilidad |
+| `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
 
 ---
 
