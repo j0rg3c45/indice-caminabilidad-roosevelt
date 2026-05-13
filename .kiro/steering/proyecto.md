@@ -20,7 +20,10 @@
 - Todos los GeoJSON se normalizan a WGS84 al cargar
 
 ## Estructura clave
-- Datos fuente: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/`
+- Datos fuente Roosevelt: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/`
+- Polígonos espejo (GeoJSON): `data/Informacion_espejo/geojson_espejo_poligonos/`
+- ZIP de polígonos espejo: `data/Informacion_espejo/geojson_espejo_poligonos.zip`
+- Datos filtrados espejo: `data/processed/Filtro_Calle_5/` y `data/processed/Filtro_Calle_7/`
 - Notebook principal: `notebooks/caminabilidad_roosevelt_v2.ipynb`
 - Scripts: `notebooks_py/`
 - Resultados: `outputs/results/` y `outputs/figures/`
