@@ -48,25 +48,14 @@ CRS_WGS84 = "EPSG:4326"
 CRS_COLOMBIA = "EPSG:3116"
 
 
-def buscar_poligono(nombre_calle):
-    """Busca el polígono del área espejo: primero .shp (local), luego .geojson."""
-    shp = ESPEJO_SHAPE_DIR / f"{nombre_calle}_area_Espejo_Bf100.shp"
-    geojson = PROCESSED_DIR / f"Filtro_{nombre_calle.replace(' ', '_').title()}" / f"{nombre_calle}_area_Espejo_Bf100.geojson"
-    if shp.exists():
-        return shp
-    elif geojson.exists():
-        return geojson
-    return None
-
-
-# Zonas espejo
+# Zonas espejo — polígonos en info_shape/, datos en processed/
 ZONAS_ESPEJO = {
     "Calle 5": {
-        "poligono": buscar_poligono("calle_5"),
+        "poligono": ESPEJO_SHAPE_DIR / "calle_5_area_Espejo_Bf100.shp",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_5" / "geojson_filtrado_calle_5_area_Espejo_Bf100",
     },
     "Calle 7": {
-        "poligono": buscar_poligono("calle_7"),
+        "poligono": ESPEJO_SHAPE_DIR / "calle_7_area_Espejo_Bf100.shp",
         "geojson_dir": PROCESSED_DIR / "Filtro_Calle_7" / "geojson_filtrado_calle_7_area_Espejo_Bf100",
     },
 }
