@@ -17,3 +17,40 @@ ejecución durante 2026–2028.
 
 *Datos mínimos:* área, intersecciones peatonales, longitud total de red,
 longitud promedio de segmento y densidad de calle (km/km²).
+
+---
+
+TABLA RESUMEN DE CRITERIOS DE VALIDACIÓN
+
+| Criterio                    | Rango válido       | Unidad       |
+|-----------------------------|--------------------|--------------|
+| Longitud del corredor       | 500 – 700          | metros       |
+| Buffer a cada lado del eje  | 100                | metros       |
+| Área del polígono           | 38 – 48            | hectáreas    |
+| Densidad de intersecciones  | 400 – 700          | int/km²      |
+| Tipología urbana            | Mixto comercial-residencial | —   |
+| Intervención planificada    | Ninguna            | 2026–2028    |
+| network_type (OSMnx)        | walk               | —            |
+| CRS de trabajo              | EPSG:4326 (WGS84)  | —            |
+| CRS de cálculo              | EPSG:3116          | —            |
+
+DATOS MÍNIMOS REQUERIDOS PARA ACEPTAR EL ESPEJO
+
+| Indicador                        | Descripción                              |
+|----------------------------------|------------------------------------------|
+| Área del polígono                | En m² y hectáreas                        |
+| Intersecciones peatonales        | Conteo de nodos con street_count > 2     |
+| Longitud total de red peatonal   | En km                                    |
+| Longitud promedio de segmento    | En metros                                |
+| Densidad de calle                | km de red / km² de área                  |
+| Densidad de intersecciones       | intersecciones / km²                     |
+
+ZONAS ESPEJO CANDIDATAS (mayo 2026)
+
+| Zona    | Polígono GeoJSON                          | Estado       |
+|---------|-------------------------------------------|--------------|
+| Calle 5 | calle_5_area_Espejo_Bf100.geojson         | En validación|
+| Calle 7 | calle_7_area_Espejo_Bf100.geojson         | En validación|
+
+Ubicación: data/Informacion_espejo/geojson_espejo_poligonos/
+Datos filtrados: data/processed/Filtro_Calle_5/ y data/processed/Filtro_Calle_7/
