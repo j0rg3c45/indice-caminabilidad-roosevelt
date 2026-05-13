@@ -82,6 +82,15 @@ Ubicación: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/`
 | VBG_2025_Roosevelt.geojson | Violencia basada en género |
 | VIOLENCIA_INTRAFAMILIAR_2023_2025_Roosevelt.geojson | Violencia intrafamiliar |
 
+### Polígonos Espejo
+Ubicación: `data/Informacion_espejo/geojson_espejo_poligonos/`
+
+| Archivo | Descripción |
+|---------|-------------|
+| calle_5_area_Espejo_Bf100.geojson | Polígono buffer 100m — Calle 5 |
+| calle_5_linea.geojson | Eje del corredor — Calle 5 |
+| calle_7_area_Espejo_Bf100.geojson | Polígono buffer 100m — Calle 7 |
+
 ---
 
 ## 5. Métricas de Línea Base (11 mayo 2026)
