@@ -1,0 +1,103 @@
+================================================================================
+CONSOLIDADO DE INFORMACIÓN POR ZONA DE ESTUDIO
+Índice de Caminabilidad — ITT Cali Inteligente
+Fecha: Mayo 2026
+================================================================================
+
+Para que la comparación Difference-in-Differences sea válida, las 3 zonas
+deben tener la MISMA información disponible.
+
+================================================================================
+ZONA PRINCIPAL: Av. Roosevelt (Intervención)
+================================================================================
+Polígono: data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/Geojson_tramos_Roosevelt_Buffer_100.geojson
+Línea eje: data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/Geojson_tramos_Roosevelt.geojson
+
+DATASETS DISPONIBLES:
+  ✓ Red peatonal OSM (descargada con OSMnx, simplify=False)
+  ✓ Siniestros viales 2023-2025
+  ✓ Comparendos 2023-2025
+  ✓ Homicidios 2023-2025
+  ✓ Hurtos 2023-2025
+  ✓ Violencia intrafamiliar (VIF) 2023-2025
+  ✓ Violencia basada en género (VBG) 2025
+  ✓ Sedes educativas oficiales
+  ✗ Estaciones MIO/MECAL (no disponible para esta zona)
+
+================================================================================
+ZONA ESPEJO 1: Calle 5
+================================================================================
+Polígono: data/Informacion_espejo/geojson_espejo_poligonos/calle_5_area_Espejo_Bf100.geojson
+Línea eje: data/Informacion_espejo/geojson_espejo_poligonos/calle_5_linea.geojson
+
+DATASETS DISPONIBLES:
+  ✓ Red peatonal OSM (por calcular con OSMnx, simplify=False)
+  ✓ Siniestros viales 2023-2025
+  ✓ Comparendos 2023-2026T1
+  ✓ Homicidios 2023-2026T1
+  ✓ Hurtos 2023-2026T1
+  ✓ Violencia intrafamiliar (VIF) 2023-2026T1
+  ✓ Violencia basada en género (VBG) 2025
+  ✗ Sedes educativas oficiales (NO disponible para Calle 5)
+  ✗ Estaciones MIO/MECAL (no disponible)
+
+Datos filtrados: data/processed/Filtro_Calle_5/geojson_filtrado_calle_5_area_Espejo_Bf100/
+
+================================================================================
+ZONA ESPEJO 2: Calle 7
+================================================================================
+Polígono: data/Informacion_espejo/geojson_espejo_poligonos/calle_7_area_Espejo_Bf100.geojson
+Línea eje: (no disponible)
+
+DATASETS DISPONIBLES:
+  ✓ Red peatonal OSM (por calcular con OSMnx, simplify=False)
+  ✓ Siniestros viales 2023-2025
+  ✓ Comparendos 2023-2026T1
+  ✓ Homicidios 2023-2026T1
+  ✓ Hurtos 2023-2026T1
+  ✓ Violencia intrafamiliar (VIF) 2023-2026T1
+  ✓ Violencia basada en género (VBG) 2025
+  ✓ Sedes educativas oficiales
+  ✗ Estaciones MIO/MECAL (no disponible)
+
+Datos filtrados: data/processed/Filtro_Calle_7/geojson_filtrado_calle_7_area_Espejo_Bf100/
+
+================================================================================
+MATRIZ DE COMPARABILIDAD
+================================================================================
+
+| Dataset                    | Roosevelt | Calle 5 | Calle 7 | Comparable |
+|----------------------------|-----------|---------|---------|------------|
+| Polígono buffer 100m       |     ✓     |    ✓    |    ✓    |     ✓      |
+| Línea eje corredor         |     ✓     |    ✓    |    ✗    |     ✗      |
+| Red peatonal OSM           |     ✓     |    ✓    |    ✓    |     ✓      |
+| Siniestros viales          |     ✓     |    ✓    |    ✓    |     ✓      |
+| Comparendos                |     ✓     |    ✓    |    ✓    |     ✓      |
+| Homicidios                 |     ✓     |    ✓    |    ✓    |     ✓      |
+| Hurtos                     |     ✓     |    ✓    |    ✓    |     ✓      |
+| Violencia intrafamiliar    |     ✓     |    ✓    |    ✓    |     ✓      |
+| VBG                        |     ✓     |    ✓    |    ✓    |     ✓      |
+| Sedes educativas           |     ✓     |    ✗    |    ✓    |     ✗      |
+| Estaciones MIO/MECAL       |     ✗     |    ✗    |    ✗    |     N/A    |
+
+================================================================================
+RESUMEN
+================================================================================
+
+Datasets 100% comparables (disponibles en las 3 zonas):
+  - Red peatonal OSM
+  - Siniestros viales
+  - Comparendos
+  - Homicidios
+  - Hurtos
+  - Violencia intrafamiliar (VIF)
+  - Violencia basada en género (VBG)
+
+Datasets con información faltante:
+  - Sedes educativas: falta en Calle 5
+  - Línea eje corredor: falta en Calle 7
+  - Estaciones MIO/MECAL: no disponible en ninguna zona
+
+NOTA: Para el análisis comparativo usar SOLO los 7 datasets disponibles
+en las 3 zonas. Los datasets incompletos se excluyen de la comparación
+Difference-in-Differences.
