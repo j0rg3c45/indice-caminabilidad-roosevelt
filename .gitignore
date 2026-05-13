@@ -25,3 +25,17 @@ outputs/figures/*.png
 
 # Cache
 cache/
+
+# Archivos pesados en data/ — solo subir .zip y archivos pequeños
+data/**/*.shp
+data/**/*.shx
+data/**/*.sbn
+data/**/*.sbx
+data/**/*.dbf
+data/**/*.cpg
+data/**/*.prj
+data/**/*.shp.xml
+data/**/*.geojson
+data/**/*.qmd
+data/**/*.kmz
+data/**/*.lock

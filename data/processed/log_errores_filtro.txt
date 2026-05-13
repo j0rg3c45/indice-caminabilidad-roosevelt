@@ -1,0 +1,9 @@
+LOG DE ERRORES - Filtro espacial
+Fecha: 2026-05-13 10:28:07
+Carpeta filtros: C:\Users\Jorge\Documents\GOBIERNO_DE_DATOS\Indice_Caminabilidad\data\Informacion_espejo\info_shape
+Carpeta datos: C:\Users\Jorge\Documents\GOBIERNO_DE_DATOS\Indice_Caminabilidad\data\Informacion_espejo\shape_LINEA_BASE
+======================================================================
+
+1. Sin registros dentro del polígono: Estaciones_MECAL.shp (filtro: calle_5_area_Espejo_Bf100)
+2. Sin registros dentro del polígono: Sedes_educativas_oficiales.shp (filtro: calle_5_area_Espejo_Bf100)
+3. Sin registros dentro del polígono: Estaciones_MECAL.shp (filtro: calle_7_area_Espejo_Bf100)
