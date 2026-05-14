@@ -1,7 +1,7 @@
 ================================================================================
 CONSOLIDADO DE INFORMACIÓN POR ZONA DE ESTUDIO
 Índice de Caminabilidad — ITT Cali Inteligente
-Fecha: Mayo 2026
+Fecha: 14 mayo 2026
 ================================================================================
 
 Para que la comparación Difference-in-Differences sea válida, las 3 zonas
@@ -12,6 +12,23 @@ ZONA PRINCIPAL: Av. Roosevelt (Intervención)
 ================================================================================
 Polígono: data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/Geojson_tramos_Roosevelt_Buffer_100.geojson
 Línea eje: data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/Geojson_tramos_Roosevelt.geojson
+
+MÉTRICAS DE CAMINABILIDAD (Línea Base 2026-05-14):
+  Área: 429,014 m² (42.90 ha)
+  Intersecciones peatonales: 232
+  Densidad intersecciones: 541 int/km²
+  Longitud red peatonal: 31.78 km
+  Longitud promedio segmento: 41.7 m
+  Densidad calle: 74.07 km/km²
+
+INDICADORES COMPLEMENTARIOS:
+  Siniestros viales:              72 registros |  1.68 por ha
+  Comparendos:                  1300 registros | 30.30 por ha
+  Homicidios:                      5 registros |  0.12 por ha
+  Hurtos:                        730 registros | 17.02 por ha
+  Sedes educativas:                2 registros |  0.05 por ha
+  VBG:                             4 registros |  0.09 por ha
+  VIF:                            24 registros |  0.56 por ha
 
 DATASETS DISPONIBLES:
   ✓ Red peatonal OSM (descargada con OSMnx, simplify=False)
@@ -30,8 +47,16 @@ ZONA ESPEJO 1: Calle 5
 Polígono: data/Informacion_espejo/geojson_espejo_poligonos/calle_5_area_Espejo_Bf100.geojson
 Línea eje: data/Informacion_espejo/geojson_espejo_poligonos/calle_5_linea.geojson
 
+MÉTRICAS DE CAMINABILIDAD (Línea Base 2026-05-14):
+  Área: 270,543 m² (27.05 ha)
+  Intersecciones peatonales: 288
+  Densidad intersecciones: 1065 int/km²
+  Longitud red peatonal: 23.33 km
+  Longitud promedio segmento: 31.5 m
+  Densidad calle: 86.25 km/km²
+
 DATASETS DISPONIBLES:
-  ✓ Red peatonal OSM (por calcular con OSMnx, simplify=False)
+  ✓ Red peatonal OSM (calculada con OSMnx, simplify=False)
   ✓ Siniestros viales 2023-2025
   ✓ Comparendos 2023-2026T1
   ✓ Homicidios 2023-2026T1
@@ -49,8 +74,16 @@ ZONA ESPEJO 2: Calle 7
 Polígono: data/Informacion_espejo/geojson_espejo_poligonos/calle_7_area_Espejo_Bf100.geojson
 Línea eje: (no disponible)
 
+MÉTRICAS DE CAMINABILIDAD (Línea Base 2026-05-14):
+  Área: 372,785 m² (37.28 ha)
+  Intersecciones peatonales: 395
+  Densidad intersecciones: 1060 int/km²
+  Longitud red peatonal: 32.64 km
+  Longitud promedio segmento: 29.8 m
+  Densidad calle: 87.56 km/km²
+
 DATASETS DISPONIBLES:
-  ✓ Red peatonal OSM (por calcular con OSMnx, simplify=False)
+  ✓ Red peatonal OSM (calculada con OSMnx, simplify=False)
   ✓ Siniestros viales 2023-2025
   ✓ Comparendos 2023-2026T1
   ✓ Homicidios 2023-2026T1
@@ -63,7 +96,44 @@ DATASETS DISPONIBLES:
 Datos filtrados: data/processed/Filtro_Calle_7/geojson_filtrado_calle_7_area_Espejo_Bf100/
 
 ================================================================================
-MATRIZ DE COMPARABILIDAD
+TABLA COMPARATIVA DE CAMINABILIDAD
+================================================================================
+
+| Métrica                      | Av. Roosevelt | Calle 5 | Calle 7 |
+|------------------------------|---------------|---------|---------|
+| Área (ha)                    |         42.90 |   27.05 |   37.28 |
+| Intersecciones peatonales    |           232 |     288 |     395 |
+| Densidad intersecciones      |      541 int/km² | 1065 int/km² | 1060 int/km² |
+| Longitud red peatonal (km)   |         31.78 |   23.33 |   32.64 |
+| Long. promedio segmento (m)  |          41.7 |    31.5 |    29.8 |
+| Densidad calle (km/km²)     |         74.07 |   86.25 |   87.56 |
+
+================================================================================
+VALIDACIÓN DE CRITERIOS PARA TERRITORIO ESPEJO
+(Según parametros_territorio_espejo.txt)
+================================================================================
+
+Criterios: Densidad intersecciones 400-700 int/km² | Área 38-48 ha
+
+| Zona          | Dens. int/km² | Válido | Área (ha) | Válido | Estado         |
+|---------------|---------------|--------|-----------|--------|----------------|
+| Av. Roosevelt |           541 |   ✓    |     42.90 |   ✓    | ✓ VÁLIDO       |
+| Calle 5       |          1065 |   ✗    |     27.05 |   ✗    | ✗ FUERA RANGO  |
+| Calle 7       |          1060 |   ✗    |     37.28 |   ✗    | ✗ FUERA RANGO  |
+
+NOTA: Ambas zonas espejo candidatas están FUERA DE RANGO en los dos criterios
+principales (densidad de intersecciones y área). Esto indica que la tipología
+de red es demasiado diferente a Roosevelt y los corredores no son espejos válidos
+según los parámetros definidos.
+
+ACCIÓN REQUERIDA: Buscar nuevos corredores candidatos que cumplan:
+  - Área entre 38-48 ha
+  - Densidad de intersecciones entre 400-700 int/km²
+  - Uso mixto comercial-residencial
+  - Sin intervención planificada 2026-2028
+
+================================================================================
+MATRIZ DE COMPARABILIDAD DE DATASETS
 ================================================================================
 
 | Dataset                    | Roosevelt | Calle 5 | Calle 7 | Comparable |
@@ -98,6 +168,10 @@ Datasets con información faltante:
   - Línea eje corredor: falta en Calle 7
   - Estaciones MIO/MECAL: no disponible en ninguna zona
 
-NOTA: Para el análisis comparativo usar SOLO los 7 datasets disponibles
-en las 3 zonas. Los datasets incompletos se excluyen de la comparación
-Difference-in-Differences.
+CONCLUSIÓN:
+Las zonas espejo candidatas (Calle 5 y Calle 7) NO cumplen los criterios
+de validación técnica definidos para el proyecto. Se requiere identificar
+nuevos corredores con tipología de red más similar a Av. Roosevelt.
+
+Ubicación polígonos: data/Informacion_espejo/geojson_espejo_poligonos/
+Datos filtrados: data/processed/Filtro_Calle_5/ y data/processed/Filtro_Calle_7/
