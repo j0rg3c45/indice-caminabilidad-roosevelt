@@ -1,5 +1,5 @@
 LOG DE ERRORES - Filtro espacial
-Fecha: 2026-05-13 10:28:07
+Fecha: 2026-05-14 09:24:15
 Carpeta filtros: C:\Users\Jorge\Documents\GOBIERNO_DE_DATOS\Indice_Caminabilidad\data\Informacion_espejo\info_shape
 Carpeta datos: C:\Users\Jorge\Documents\GOBIERNO_DE_DATOS\Indice_Caminabilidad\data\Informacion_espejo\shape_LINEA_BASE
 ======================================================================
