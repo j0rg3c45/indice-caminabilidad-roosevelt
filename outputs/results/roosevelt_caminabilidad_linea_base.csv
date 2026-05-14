@@ -1,0 +1,2 @@
+fecha_medicion,crs_trabajo,crs_calculo,area_m2,area_ha,intersecciones_peatonales,longitud_red_peatonal_km,longitud_promedio_segmento_m,densidad_calle_km_km2,nodos_osm,segmentos_osm,fuente,momento,poligono
+2026-05-14,EPSG:4326,EPSG:3116,429014.0,42.9,407,32.13,29.0,74.9,421,1108,OpenStreetMap via OSMnx,linea_base_pre_intervencion,Av. Roosevelt - Buffer 100m

@@ -7,7 +7,7 @@ Descarga la red peatonal y la guarda como GeoJSON en la carpeta de datos.
 
 Uso:
     uv run notebooks_py/caminabilidad_roosevelt.py
-    uv run notebooks_py/caminabilidad_roosevelt.py --geojson <ruta_poligono>
+   
 
 Repositorio: https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
 """
