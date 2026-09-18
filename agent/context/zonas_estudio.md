@@ -1,56 +1,61 @@
-# Zonas de estudio
+# Zonas de estudio — Índice de Caminabilidad
 
-## ITT Roosevelt
+## Av. Roosevelt
 
-- Estado: implementado.
-- Notebook: `notebooks/01_itt_roosevelt.ipynb`
-- Unidad de analisis: corredor con buffer de 100 m.
-- Metodo espacial: uso de capa buffer y eventos territoriales de la zona.
-- Periodo: 2023-2025.
-- Metodologia: usa `ref_min/ref_max` fijos y la estructura funcional de Barrio Obrero.
-- Referentes provisionales: Entorno Urbano 39.2, Educacion y Desarrollo 54.9, Vulnerabilidad 54.1.
-- Datos en repo: `Roosevelt.zip` presente y carpeta descomprimida de trabajo disponible.
-- Observacion: notebook operativo, pendiente de afinacion futura de referentes si se incorporan nuevos indicadores de entorno.
+- Estado: implementado (notebook principal).
+- Notebook: `notebooks/caminabilidad_roosevelt_v2.ipynb`
+- Script: `notebooks_py/caminabilidad_roosevelt.py`
+- Unidad de análisis: corredor vial con buffer de 100 m.
+- Territorio espejo: sí (Calle 5 y Calle 7 como controles candidatos).
+- Datos fuente: `data/itt_roosevelt/Roosevelt/Geojson_Roosevelt/` (versionado como `Roosevelt.zip`).
+- Datasets complementarios: siniestros, comparendos, homicidios, hurtos, sedes educativas, VBG, VIF.
+- Criterios de territorio espejo (`data/external/parametros_territorio_espejo.txt`):
+  corredor 500–700 m, buffer 100 m, área 38–48 ha, densidad de intersecciones 400–700 int/km².
 
-## ITT Avenida Ciudad de Cali
+### Métricas de línea base — Roosevelt (11 mayo 2026)
 
-- Estado: implementado.
-- Notebook: `notebooks/02_itt_avenida_ciudad_de_cali.ipynb`
-- Unidad de analisis: 8 tramos buffer de 100 m sobre corredor vial.
-- Metodo espacial: spatial join de eventos a tramos.
-- Periodo: 2023-2025.
-- Metodologia: funcional, pero pendiente de migracion a `ref_min/ref_max` fijos.
-- Referentes provisionales: Entorno Urbano 39.2, Educacion y Desarrollo 54.9.
-- Datos en repo: estructura creada, pero insumos fuente no versionados.
+| Indicador | Valor |
+|---|---|
+| Área del polígono | 42.9 ha (429,014 m²) |
+| Intersecciones peatonales | 232 |
+| Longitud red peatonal | 31.78 km |
+| Longitud promedio segmento | 41.7 m |
+| Densidad de calle | 74.07 km/km² |
+| Nodos OSM | 246 |
+| Segmentos OSM | 762 |
 
-## ITT Barrio Obrero
-
-- Estado: implementado.
-- Notebook: `notebooks/03_itt_barrio_obrero.ipynb`
-- Unidad de analisis: poligono unico del barrio.
-- Metodo espacial: no requiere spatial join por tramo.
-- Periodo: 2023-2025.
-- Metodologia: usa `ref_min/ref_max` fijos por indicador.
-- Referentes provisionales de base: Entorno Urbano 39.2, Educacion y Desarrollo 54.9, Vulnerabilidad 54.1.
-- Estado actual de Entorno Urbano: el notebook ya puede sobrescribir `39.2` con un proxy experimental usando `BD_DEFICIT_HABITACIONAL_COM_CORREG_2024 (1).xlsx`.
-- Base territorial del proxy: `Comuna 9` como aproximacion a Barrio Obrero.
-- Periodicidad real del proxy de Entorno Urbano: anual `2024`, no mensual ni trimestral observada.
-- Visualizacion interna reciente: `heatmap` de componentes del deficit cualitativo 2024.
-- Datos en repo: `obrero.zip` presente; capas se cargan por descompresion o Colab.
-
-## ITT Pulmon de Oriente
+## Barrio Obrero
 
 - Estado: implementado.
-- Notebook: `notebooks/04_itt_pulmon_oriente_2026_v2.ipynb`
-- Unidad de analisis: zona agregada multiples comunas (>200K hab).
-- Metodo espacial: no requiere spatial join (eventos ya filtrados a la zona).
-- Periodo: 2023-2026.
-- Metodologia: usa `ref_min/ref_max` fijos trimestrales (zona grande, guia metodologica seccion 4.1).
-- Referentes provisionales: Movilidad 35.0, Entorno Urbano 39.2, Educacion y Desarrollo 54.9, Vulnerabilidad 54.1.
-- Datos en repo: `Pulmon_De_Oriente_2026.zip` presente con ZIP consolidado.
-- Deduplicacion: automatica por fecha+coordenada (elimina duplicados en hurtos, VIF y comparendos).
-- Periodo 2026: solo T1 tiene datos reales; Q2, Q3 y Q4 se estiman con valores Proxy.
-- Valores Proxy: calculados como promedio historico trimestral de 2023-2025.
-- Marcado: todos los valores Proxy se identifican con doble asterisco (`**`).
+- Notebook: `notebooks/caminabilidad_barrio_obrero_v2.ipynb`
+- Script: `notebooks_py/caminabilidad_barrio_obrero.py`
+- Unidad de análisis: **polígono único de barrio** (no corredor, no buffer).
+- Territorio espejo: no aplica.
+- Datos fuente: `data/Geojson_Barrio_Obrero/` (versionado como `Geojson_Barrio_Obrero.zip`).
+- El polígono viene en CRS `ESRI:103599` (MAGNA-SIRGAS CMT12) y se reproyecta a WGS84 al cargar.
+- Datasets complementarios (2023–2026 T1): comparendos, homicidios, hurtos, violencia
+  intrafamiliar y censo arbóreo (indicador adicional propio de esta zona).
 
-> **Nota metodologica:** Los valores correspondientes a los trimestres Q2, Q3 y Q4 del año 2026 fueron estimados mediante valores Proxy calculados a partir de la linea base historica de los años 2023–2025, con el fin de normalizar la informacion y garantizar comparabilidad estadistica y visual en el analisis.
+### Métricas de línea base — Barrio Obrero (18 septiembre 2026)
+
+| Indicador | Valor |
+|---|---|
+| Área del polígono | 7.47 ha (74,692 m²) |
+| Intersecciones peatonales | 26 |
+| Longitud red peatonal | 3.6 km |
+| Longitud promedio segmento | 54.6 m |
+| Densidad de calle | 48.26 km/km² |
+| Densidad de intersecciones | 348 int/km² |
+| Nodos OSM | 26 |
+| Segmentos OSM | 66 |
+
+Eventos complementarios: comparendos 3.741, hurtos 663, violencia intrafamiliar 82,
+homicidios 27, censo arbóreo 874.
+
+## Notas de comparabilidad
+
+- Roosevelt y Barrio Obrero usan la misma metodología de caminabilidad (red peatonal
+  OSM con `simplify=False`, mismas métricas), pero con unidad de análisis distinta:
+  corredor con buffer vs polígono de barrio.
+- Las densidades (por hectárea, km/km², int/km²) permiten comparar zonas de tamaño
+  diferente de forma normalizada.

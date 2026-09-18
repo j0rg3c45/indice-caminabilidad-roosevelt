@@ -1,58 +1,87 @@
-# Contexto para agente - Proyecto ITT
+# Contexto para agente — Proyecto Índice de Caminabilidad
 
-Este agente apoya consulta, interpretacion y explicacion del **Indice de Transformacion Territorial (ITT)** dentro del repositorio `itt-transformacion-territorial`.
+Este agente apoya consulta, interpretación y desarrollo del **Índice de Caminabilidad**
+para zonas de intervención urbana en Cali, Colombia, dentro del repositorio
+`indice-caminabilidad-roosevelt`.
 
 ## Objetivo del proyecto
 
-Calcular el ITT para zonas de intervencion urbana en Cali y comparar resultados entre zonas.
+Evaluar el impacto de intervenciones urbanas midiendo la **caminabilidad** de la
+red peatonal (OpenStreetMap vía OSMnx), estableciendo una línea base pre-intervención
+y permitiendo comparaciones entre zonas y en el tiempo (2026–2028).
+
+Métricas centrales: intersecciones peatonales, longitud de red, longitud promedio de
+segmento, densidad de calle (km/km²) y densidad de intersecciones (int/km²).
+
+## Repositorio
+
+- URL: https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
+- Branch principal: `main`
+- Convención: hacer commit y push después de cada cambio.
+
+## Sistema de referencia geoespacial
+
+- CRS de trabajo (todo dato y visualización): WGS84 (EPSG:4326).
+- CRS de cálculo (solo área/distancia): EPSG:3116 (Colombia).
+- OSMnx siempre recibe polígonos en WGS84.
+- Todo GeoJSON se normaliza a WGS84 al cargar (si no tiene CRS se asigna 4326; si tiene otro, se reproyecta).
 
 ## Zonas del repo
 
-- ITT Roosevelt.
-- Avenida Ciudad de Cali.
-- Barrio Obrero.
+- **Av. Roosevelt** — corredor con buffer de 100 m. Con territorio espejo (Calle 5, Calle 7).
+- **Barrio Obrero** — polígono único de barrio. Sin territorio espejo.
 
-## Estado actual
+## Estado actual de notebooks
 
-- `01_itt_roosevelt.ipynb`: implementado con estructura homologada a Barrio Obrero y `ref_min/ref_max` fijos.
-- `02_itt_avenida_ciudad_de_cali.ipynb`: implementado, pero aun usa min-max relativo en la normalizacion de indicadores reales.
-- `03_itt_barrio_obrero.ipynb`: implementado y alineado con `ref_min/ref_max` fijos.
-- `04_itt_pulmon_oriente_2026.ipynb`: salida parcial de seguimiento.
-- `05_comparativo_itt_zonas.ipynb`: plantilla comparativa.
+- `notebooks/caminabilidad_roosevelt_v2.ipynb`: notebook principal. Corredor con buffer,
+  red peatonal OSM, indicadores complementarios y comparación con territorios espejo
+  (Calle 5 y Calle 7).
+- `notebooks/caminabilidad_barrio_obrero_v2.ipynb`: replica la lógica de Roosevelt
+  adaptada a polígono único de barrio, sin sección de territorio espejo. Incluye censo
+  arbóreo como indicador complementario.
+- `notebooks/ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb`: notebook de referencia externo
+  (ejemplo ITT), no forma parte del pipeline de caminabilidad.
 
-## Regla metodologica para agentes
+## Scripts equivalentes (`notebooks_py/`)
 
-La referencia metodologica vigente del proyecto esta en:
+- `caminabilidad_roosevelt.py`: pipeline Roosevelt (red peatonal + métricas + mapa).
+- `caminabilidad_barrio_obrero.py`: pipeline Barrio Obrero (red peatonal + métricas + eventos + mapa).
+- `caminabilidad_espejo.py`: caminabilidad territorios espejo + comparación vs Roosevelt.
+- `descargar_red_peatonal.py`: solo descarga la red peatonal y la guarda como GeoJSON.
+- `graficos_base_caminabilidad.py`: gráficos base de caminabilidad.
+- `convertir_poligonos_espejo.py`: convierte polígonos espejo de `.shp` a `.geojson` (WGS84).
 
-- `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`
+## Entorno de ejecución
 
-Los agentes deben asumir como correcto:
+- Sistema operativo: Windows. Gestor de paquetes: `uv` (v0.11.11).
+- Instalar dependencias: `uv pip install -r requirements.txt`.
+- Ejecutar scripts: `uv run notebooks_py/<script>.py`.
+- No usar `pip` ni `python -m venv` directamente.
+- El notebook funciona en Colab (clona el repo) y en local (rutas relativas).
 
-- Uso de `ref_min/ref_max` fijos.
-- Referentes provisionales para dimensiones sin datos propios.
-- Necesidad de escalar refs segun tamano de zona.
+## Notas técnicas
 
-Los agentes no deben asumir como vigente:
+- Red peatonal OSM se descarga con `simplify=False` para conservar todos los vértices.
+- Google tiles en Folium: `http://{s}.google.com/vt/lyrs=...` con `subdomains=['mt0','mt1','mt2','mt3']`.
+- Silenciar warnings de pyogrio: `logging.getLogger('pyogrio').setLevel(logging.ERROR)`.
 
-- Min-max relativo como metodo recomendado general.
+## Datos versionados
 
-## Uso esperado por el agente
+Convención del `.gitignore`: en `data/` solo se versionan `.zip` y archivos pequeños;
+los `.geojson`, `.shp` y afines crudos están ignorados.
 
-El agente debe diferenciar entre:
+- Roosevelt: `data/itt_roosevelt/Roosevelt.zip` (fuente) + carpeta de trabajo descomprimida.
+- Barrio Obrero: `data/Geojson_Barrio_Obrero.zip` (fuente) + carpeta de trabajo descomprimida.
+- Polígonos espejo: `data/Informacion_espejo/geojson_espejo_poligonos.zip`.
+- Datos filtrados espejo: `data/processed/Filtro_Calle_5/` y `data/processed/Filtro_Calle_7/`.
 
-- Metodologia vigente.
-- Implementacion ya migrada.
-- Implementacion pendiente de migrar.
-- Datos presentes en el repo.
-- Datos esperados pero no versionados.
+## Regla de sincronización
 
-## Seguimiento reciente
+Cada vez que se modifique un notebook, actualizar también en el mismo cambio:
 
-- Roosevelt ya dispone de datos fuente en `data/itt_roosevelt/`.
-- Se revisaron errores de consistencia por `ano` y `año`; la convencion vigente en Roosevelt es `año`.
-- Se agregaron Excel de vivienda en `data/referencia/` para evaluar si `Entorno Urbano` puede dejar de depender de un referente fijo.
-- `03_itt_barrio_obrero.ipynb` ya usa experimentalmente `BD_DEFICIT_HABITACIONAL_COM_CORREG_2024 (1).xlsx` para recalcular `Entorno Urbano` con `Comuna 9` como proxy territorial.
-- Ese insumo de `Entorno Urbano` es un corte anual `2024`; la visualizacion reciente recomendada es un `heatmap` de componentes del deficit cualitativo.
-- Para Pulmon de Oriente 2026, se implemento deduplicacion por fecha+coordenada y generacion de valores Proxy para Q2, Q3 y Q4 basados en promedio historico trimestral 2023-2025.
-- Los valores Proxy se marcan con doble asterisco (`**`) en todas las salidas.
-- Referencia metodologica completa: `docs/05_nota_metodologica_proxy_2026.md`.
+- `README.md` (pipeline, capas, métricas, scripts).
+- `docs/referencia_proceso.md` (pipeline, datos, métricas, historial de commits).
+- El script `.py` equivalente en `notebooks_py/`.
+- Estos archivos de contexto del agente cuando cambie el estado del proyecto.
+
+Hacer commit y push automáticamente, sin esperar a que el usuario lo pida.

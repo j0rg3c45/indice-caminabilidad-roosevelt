@@ -1,232 +1,134 @@
-# Contexto Maestro para Agente
+# Contexto Maestro para Agente — Índice de Caminabilidad
 
-Este archivo resume el contexto mas importante del repo para que otro agente pueda trabajar con buen criterio metodologico y operativo desde el inicio.
+Este archivo resume el contexto más importante del repo para que otro agente pueda
+trabajar con buen criterio técnico y operativo desde el inicio.
 
 ## 1. Objetivo del proyecto
 
-El repositorio calcula el **Indice de Transformacion Territorial (ITT)** para zonas de intervencion urbana de Cali, Colombia.
+El repositorio calcula un **Índice de Caminabilidad** para zonas de intervención
+urbana de Cali, Colombia, usando la red peatonal de OpenStreetMap (OSMnx).
 
-El ITT busca medir transformacion positiva del territorio en escala `0-100` y permitir comparaciones entre zonas usando una metodologia comun.
+Busca establecer una línea base pre-intervención y permitir comparaciones entre
+zonas y a lo largo del tiempo (2026–2028), a partir de métricas topológicas de la
+red peatonal.
 
-## 2. Regla metodologica principal
+- Repositorio: https://github.com/j0rg3c45/indice-caminabilidad-roosevelt.git
+- Branch principal: `main`.
 
-La metodologia vigente del proyecto exige:
+## 2. Métricas centrales
 
-- Usar `ref_min/ref_max` fijos por indicador.
-- No usar min-max relativo calculado desde la propia muestra de la zona cuando el territorio es pequeno o los conteos son bajos.
-- Diferenciar entre datos reales, referentes provisionales y resultados efectivamente calculados.
+Se derivan del grafo peatonal descargado con OSMnx (`network_type='walk'`, `simplify=False`):
 
-La fuente metodologica principal y prioritaria es:
+- Intersecciones peatonales.
+- Longitud total de red (km).
+- Longitud promedio de segmento (m).
+- Densidad de calle (km/km²).
+- Densidad de intersecciones (int/km²).
+- Nodos y segmentos OSM.
 
-- `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`
+Además se cargan datasets complementarios por zona (eventos de seguridad, sedes,
+censo arbóreo, etc.) y se reportan como total y densidad por hectárea.
 
-Si hay contradiccion entre un resumen corto en `docs/` y la guia metodologica completa, debe priorizarse la guia metodologica completa y luego el estado real de los notebooks.
+## 3. Sistema de referencia geoespacial
 
-## 3. Dimensiones y pesos oficiales
+- CRS de trabajo (datos y visualización): WGS84 (EPSG:4326).
+- CRS de cálculo (solo área/distancia): EPSG:3116 (Colombia).
+- OSMnx siempre recibe polígonos en WGS84.
+- Todo GeoJSON se normaliza a WGS84 al cargar.
 
-El ITT vigente usa 5 dimensiones:
+## 4. Zonas del repo y cómo pensarlas
 
-- Seguridad: `0.30`
-- Movilidad: `0.25`
-- Entorno Urbano: `0.20`
-- Educacion y Desarrollo: `0.13`
-- Cohesion Social: `0.12`
+### Av. Roosevelt
 
-La suma de los pesos debe ser `1.0`.
-
-## 4. Referentes provisionales actuales
-
-Mientras una zona no tenga datos propios para ciertas dimensiones o indicadores, el proyecto usa referentes de `Pulmon de Oriente`.
-
-Valores vigentes:
-
-- `Entorno Urbano = 39.2`
-- `Educacion y Desarrollo = 54.9`
-- `Vulnerabilidad = 54.1`
-
-Estos valores deben tratarse como **provisionales**, no como mediciones propias de la zona analizada.
-
-Excepcion actual importante:
-
-- En `notebooks/03_itt_barrio_obrero.ipynb`, `Entorno Urbano` ya puede dejar de usar `39.2` si se ejecuta la celda proxy basada en `deficit habitacional 2024`.
-
-## 5. Estado real de notebooks
-
-### Notebook de referencia principal
-
-- `notebooks/03_itt_barrio_obrero.ipynb`
-
-Este notebook es la referencia operativa mas importante del repo porque:
-
-- Ya usa `ref_min/ref_max` fijos.
-- Tiene la estructura metodologica vigente.
-- Es el mejor punto de partida para revisar logica de calculo, normalizacion, pesos, series anuales y trimestrales, y exportacion.
-- Ademas, ya documenta un caso real de reemplazo parcial del referente fijo de `Entorno Urbano` mediante un proxy territorial.
-
-### Detalle actual de Entorno Urbano en Barrio Obrero
-
-- La celda `3B` recalcula `REF_ENTORNO_U` con `BD_DEFICIT_HABITACIONAL_COM_CORREG_2024 (1).xlsx`.
-- La base territorial usada es `Comuna 9`, como aproximacion a `Barrio Obrero`.
-- El proxy combina dos componentes:
-  - `Deficit Cualitativo`
-  - `Deficit Cualitativo / Deficit Habitacional`
-- Ambos componentes se normalizan con referencias fijas y luego se promedian.
-- La celda `3C` agrega una visualizacion `heatmap` de componentes del deficit cualitativo 2024.
-- Ese insumo no tiene periodicidad mensual ni trimestral observada; es un corte anual `2024`.
-- `Predios titulados` y `subsidios de mejoramiento` fueron revisados, pero no hacen parte del calculo actual de esta dimension.
-
-### Roosevelt
-
-- `notebooks/01_itt_roosevelt.ipynb`
-
-Estado:
-
-- Implementado.
-- Ya migrado a `ref_min/ref_max` fijos.
-- Replica la estructura de Barrio Obrero, adaptada a corredor con buffer.
-- Usa referentes provisionales para `Entorno Urbano`, `Educacion y Desarrollo` y `Vulnerabilidad`.
-
-### Avenida Ciudad de Cali
-
-- `notebooks/02_itt_avenida_ciudad_de_cali.ipynb`
-
-Estado:
-
-- Implementado y funcional.
-- Analiza 8 tramos buffer de 100 m sobre corredor vial.
-- Requiere `spatial join` de eventos a tramos.
-- Sigue usando min-max relativo para normalizar indicadores reales.
-
-Conclusion importante:
-
-- Es la principal deuda metodologica del repo.
-- No debe asumirse como notebook plenamente homologado al metodo vigente.
-
-### Pulmon de Oriente 2026
-
-- `notebooks/04_itt_pulmon_oriente_2026_v2.ipynb`
-
-Estado:
-
-- No es el notebook comparativo del proyecto.
-- Es una salida completa para Seguridad y Cohesion Social 2023-2026.
-- 2026 solo tiene datos reales de T1; Q2, Q3 y Q4 se estiman con valores Proxy (promedio historico trimestral 2023-2025).
-- Los valores Proxy se marcan con doble asterisco (`**`).
-- Incluye deduplicacion automatica por fecha+coordenada.
-
-Rol en el proyecto:
-
-- Sirve como referencia de seguimiento con serie temporal completa (real + Proxy).
-- Pulmon de Oriente tambien es la base de los referentes provisionales usados por otras zonas.
-
-### Comparativo entre zonas
-
-- `notebooks/05_comparativo_itt_zonas.ipynb`
-
-Estado:
-
-- Es la plantilla comparativa real que existe hoy en disco.
-- Depende de resultados exportados por zona.
-- Todavia no representa un flujo consolidado totalmente maduro.
-
-## 6. Zonas del repo y como pensarlas
+- Unidad de análisis: corredor vial con buffer de 100 m.
+- Notebook: `notebooks/caminabilidad_roosevelt_v2.ipynb` (referencia principal).
+- Tiene sección de **territorios espejo** (Calle 5 y Calle 7) como controles candidatos.
+- Datasets: siniestros, comparendos, homicidios, hurtos, sedes educativas, VBG, VIF.
 
 ### Barrio Obrero
 
-- Unidad de analisis: poligono unico.
-- No requiere `spatial join` por tramo.
-- Caso mas limpio para entender la metodologia vigente.
-- Caso actual mas importante para entender el uso experimental de `deficit habitacional` dentro de `Entorno Urbano`.
+- Unidad de análisis: **polígono único de barrio** (no corredor, no buffer, sin espejo).
+- Notebook: `notebooks/caminabilidad_barrio_obrero_v2.ipynb`.
+- El polígono llega en CRS `ESRI:103599` y se reproyecta a WGS84 al cargar.
+- Datasets (2023–2026 T1): comparendos, homicidios, hurtos, violencia intrafamiliar y
+  censo arbóreo (indicador propio de esta zona).
 
-### Roosevelt
+## 5. Estado real de notebooks y scripts
 
-- Unidad de analisis: corredor con buffer de 100 m.
-- Periodo trabajado: `2023-2025`.
-- Caso homologado a la metodologia vigente pero en contexto de corredor.
+Notebooks (`notebooks/`):
 
-### Avenida Ciudad de Cali
+- `caminabilidad_roosevelt_v2.ipynb`: pipeline completo Roosevelt + comparación espejo.
+- `caminabilidad_barrio_obrero_v2.ipynb`: pipeline Barrio Obrero (polígono único, sin espejo).
+- `ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb`: ejemplo externo de ITT, NO forma parte
+  del pipeline de caminabilidad; tratarlo solo como referencia.
 
-- Unidad de analisis: 8 tramos.
-- Metodo espacial: `spatial join`.
-- Caso mas complejo espacialmente.
-- Todavia no esta homologado en normalizacion.
+Scripts (`notebooks_py/`):
 
-### Pulmon de Oriente
+- `caminabilidad_roosevelt.py`, `caminabilidad_barrio_obrero.py`: pipelines equivalentes a los notebooks.
+- `caminabilidad_espejo.py`: caminabilidad de territorios espejo + comparación vs Roosevelt.
+- `descargar_red_peatonal.py`: descarga y guarda la red peatonal como GeoJSON.
+- `graficos_base_caminabilidad.py`: gráficos base.
+- `convertir_poligonos_espejo.py`: convierte polígonos espejo `.shp` → `.geojson` (WGS84).
 
-- Funciona como referencia metodologica.
-- Aporta los scores provisionales usados en otras zonas.
-- Tiene notebook propio parcial 2026, pero no equivale al flujo principal de comparacion entre zonas.
+## 6. Disponibilidad real de datos
 
-## 7. Disponibilidad real de datos
+Convención del `.gitignore`: en `data/` solo se versionan `.zip` y archivos pequeños;
+los `.geojson`, `.shp`, `.qmd`, `.kmz` crudos están ignorados.
 
-### Datos presentes en el repo
+- Roosevelt: `data/itt_roosevelt/Roosevelt.zip` + carpeta de trabajo descomprimida.
+- Barrio Obrero: `data/Geojson_Barrio_Obrero.zip` + carpeta de trabajo descomprimida.
+- Polígonos espejo: `data/Informacion_espejo/geojson_espejo_poligonos.zip`.
+- Datos filtrados espejo: `data/processed/Filtro_Calle_5/` y `data/processed/Filtro_Calle_7/`.
 
-Hay ZIP versionados para:
+## 7. Entorno de ejecución
 
-- `data/itt_roosevelt/`
-- `data/itt_barrio_obrero/`
-- `data/itt_pulmon_oriente/`
+- Sistema operativo: Windows. Gestor de paquetes: `uv` (v0.11.11).
+- Instalar dependencias: `uv pip install -r requirements.txt`.
+- Ejecutar scripts: `uv run notebooks_py/<script>.py`.
+- No usar `pip` ni `python -m venv` directamente.
+- El notebook funciona en Colab (clona el repo) y en local (rutas relativas).
+- Notas técnicas: `simplify=False` en OSM; Google tiles con subdomains `mt0-mt3`;
+  silenciar warnings de pyogrio con `logging.getLogger('pyogrio').setLevel(logging.ERROR)`.
 
-Estos ZIP contienen insumos reales para trabajo territorial y validan que Roosevelt, Barrio Obrero y Pulmon de Oriente si tienen base de datos local dentro del repo.
+## 8. Regla de sincronización
 
-### Datos no versionados en el repo
+Cada vez que se modifique un notebook, actualizar en el mismo cambio:
 
-- `data/itt_avenida_ciudad_de_cali/` tiene estructura y README, pero no trae los insumos fuente versionados.
+- `README.md` (pipeline, capas, métricas, scripts).
+- `docs/referencia_proceso.md` (pipeline, datos, métricas, historial de commits).
+- El script `.py` equivalente en `notebooks_py/`.
+- Estos archivos de contexto del agente cuando cambie el estado del proyecto.
 
-Implicacion:
+Hacer commit y push automáticamente después de los cambios.
 
-- Su ejecucion depende de carga externa, Colab o entrega manual de archivos.
+## 9. Dónde vive el conocimiento
 
-## 8. Referencias territoriales y su estado actual
+Para responder bien sobre este repo, leer en este orden:
 
-La carpeta `data/referencia/` contiene Excel de apoyo metodologico:
-
-- `BD_DEFICIT_HABITACIONAL_COM_CORREG_2024 (1).xlsx`
-- `BD_PREDIOS_TITULADOS 2023-2025 (1).xlsx`
-- `BD_SUBSIDIOS_MEJORAMIENTO_VIV_AÑOS_2024_2025 (1).xlsx`
-
-Lectura correcta:
-
-- No todos hacen parte del calculo actual del ITT.
-- Se consideran insumos potenciales para fortalecer `Entorno Urbano` u otras lecturas territoriales futuras.
-- El candidato mas fuerte documentado hoy para `Entorno Urbano` es el deficit habitacional.
-- Ese candidato ya fue incorporado de forma experimental en `03_itt_barrio_obrero.ipynb`.
-- `Predios titulados` y `subsidios de mejoramiento` siguen fuera del calculo actual de la dimension.
-
-## 9. Donde vive el conocimiento
-
-Para responder bien sobre este repo, un agente debe leer en este orden:
-
-1. `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`
-2. `agent/context/contexto_proyecto.md`
-3. `agent/context/zonas_estudio.md`
-4. `docs/03_fuentes_datos.md`
-5. `notebooks/03_itt_barrio_obrero.ipynb`
-6. `notebooks/01_itt_roosevelt.ipynb`
-7. `notebooks/02_itt_avenida_ciudad_de_cali.ipynb`
+1. `README.md`
+2. `docs/referencia_proceso.md`
+3. `agent/context/contexto_proyecto.md`
+4. `agent/context/zonas_estudio.md`
+5. `notebooks/caminabilidad_roosevelt_v2.ipynb`
+6. `notebooks/caminabilidad_barrio_obrero_v2.ipynb`
 
 ## 10. Precauciones para otro agente
 
-- No asumir que todo notebook implementado ya esta metodologicamente homologado.
-- No confundir `04_itt_pulmon_oriente_2026.ipynb` con el comparativo entre zonas.
-- No asumir que `outputs/` ya contiene resultados versionados listos para consolidacion.
-- Tratar con cuidado textos con problemas de codificacion como `año`, `T1`, o caracteres especiales en algunos `.md` y notebooks.
-- Distinguir siempre entre:
-  - dato observado real
-  - score normalizado
-  - referente provisional
-  - valor Proxy estimado (marcado con `**`)
-  - resultado exportado
-- No presentar el proxy de `Entorno Urbano` de Barrio Obrero como serie mensual o trimestral observada.
-- Los valores Proxy de 2026 Q2-Q4 deben identificarse siempre con doble asterisco (`**`) y no deben presentarse como datos reales observados.
-- Cuando se reemplacen valores Proxy por datos reales, actualizar simultaneamente todos los `.md` del proyecto.
+- Este repo es de **caminabilidad** (red peatonal OSM), no un ITT de 5 dimensiones con
+  scores normalizados. No asumir dimensiones, pesos ni referentes provisionales de un
+  ITT genérico salvo que el usuario lo pida explícitamente.
+- No confundir `ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb` con el pipeline de caminabilidad.
+- Distinguir la unidad de análisis: Roosevelt es corredor con buffer; Barrio Obrero es
+  polígono único de barrio (sin espejo).
+- Los `.geojson` crudos NO se versionan; los datos fuente van como `.zip` en `data/`.
+- Las figuras (`outputs/figures/*.png`) están en `.gitignore`; los CSV de resultados sí se versionan.
 
-## 11. Resumen ejecutivo para handoff rapido
+## 11. Resumen ejecutivo para handoff rápido
 
-Este repo ya tiene una metodologia definida y parcialmente consolidada. `Barrio Obrero` es la referencia operativa vigente. `Roosevelt` ya esta alineado con esa metodologia. `Avenida Ciudad de Cali` sigue funcional, pero pendiente de migrar desde min-max relativo hacia `ref_min/ref_max` fijos. `Pulmon de Oriente` es la referencia metodologica de fondo y la fuente de los scores provisionales usados en otras zonas. Los datos versionados existen para Roosevelt, Barrio Obrero y Pulmon de Oriente, pero no para Avenida Ciudad de Cali. En Barrio Obrero, `Entorno Urbano` ya puede recalcularse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`, explicado con un `heatmap` de componentes del deficit cualitativo 2024.
-
-## 12. Prompt sugerido para otro agente
-
-Puedes iniciar a otro agente con este texto:
-
-> Este repo calcula el ITT de zonas urbanas de Cali. La metodologia vigente exige `ref_min/ref_max` fijos por indicador y esta documentada en `agent/knowledge_base/Guia_ITT_Metodologia_Notebook.md`. `notebooks/03_itt_barrio_obrero.ipynb` es la referencia operativa principal; `notebooks/01_itt_roosevelt.ipynb` ya esta alineado a esa logica; `notebooks/02_itt_avenida_ciudad_de_cali.ipynb` sigue funcional pero aun usa min-max relativo y debe tratarse como implementacion pendiente de homologacion. Los referentes provisionales actuales provenientes de Pulmon de Oriente son `Entorno Urbano = 39.2`, `Educacion y Desarrollo = 54.9` y `Vulnerabilidad = 54.1`, pero en Barrio Obrero `Entorno Urbano` ya puede sobrescribirse con un proxy experimental de `deficit habitacional 2024` para `Comuna 9`. Ese proxy no tiene periodicidad mensual o trimestral observada; su visualizacion adecuada hoy es el `heatmap` de componentes del deficit cualitativo 2024. Distingue siempre entre datos reales, scores provisionales y metodologia vigente. No inventes outputs no versionados ni asumas que el comparativo ya esta completo.
+Este repo calcula un índice de caminabilidad de zonas urbanas de Cali con OSMnx.
+`caminabilidad_roosevelt_v2.ipynb` es la referencia principal (corredor con buffer +
+territorios espejo Calle 5/7). `caminabilidad_barrio_obrero_v2.ipynb` replica esa lógica
+para un polígono único de barrio, sin espejo, e incorpora censo arbóreo. Todo trabaja en
+WGS84 y usa EPSG:3116 solo para área/distancia. Los datos fuente se versionan como `.zip`.
+Al cambiar un notebook, sincronizar README, `docs/referencia_proceso.md`, el script `.py`
+equivalente y estos archivos de contexto, y hacer commit + push.

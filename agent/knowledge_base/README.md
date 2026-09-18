@@ -1,30 +1,34 @@
 # Knowledge base del agente
 
-Guardar aqui los documentos y resultados que un agente debe consultar para responder con contexto tecnico y metodologico correcto.
+Guardar aquí los documentos y resultados que un agente debe consultar para responder
+con contexto técnico correcto sobre el **Índice de Caminabilidad**.
 
 ## Prioridad de consulta
 
-1. `Guia_ITT_Metodologia_Notebook.md`
-2. Resultados exportados por notebooks
-3. Fuentes de datos registradas
-4. Resumenes ejecutivos por zona
-5. Comparativos consolidados
+1. `README.md` (raíz del repo)
+2. `docs/referencia_proceso.md`
+3. `agent/context/contexto_proyecto.md` y `agent/context/zonas_estudio.md`
+4. Notebooks: `caminabilidad_roosevelt_v2.ipynb`, `caminabilidad_barrio_obrero_v2.ipynb`
+5. Resultados exportados en `outputs/results/`
 
 ## Contenido recomendado
 
-- Documento metodologico vigente.
-- Excels generados por notebooks.
-- Resumenes ejecutivos por zona.
-- Comparativo consolidado.
-- Inventario de fuentes y observaciones de calidad.
-- Referencias auxiliares en evaluacion metodologica, como insumos de vivienda para `Entorno Urbano`.
+- Documentación del proceso y del pipeline de caminabilidad.
+- Resúmenes de métricas por zona.
+- Inventario de fuentes de datos y observaciones de calidad.
+- Criterios de territorio espejo (para Roosevelt).
 
 ## Regla de consistencia
 
-Si existe diferencia entre un resumen corto de `docs/` y la guia metodologica completa, el agente debe priorizar la guia metodologica completa y luego verificar el estado real de los notebooks.
+Si existe diferencia entre un resumen corto y la documentación completa
+(`README.md` + `docs/referencia_proceso.md`), priorizar la documentación completa y
+luego verificar el estado real de los notebooks y scripts.
 
 ## Estado de referencia actual
 
-- `03_itt_barrio_obrero.ipynb` sigue siendo la referencia metodologica principal.
-- `01_itt_roosevelt.ipynb` ya replica esa estructura con adaptaciones de corredor.
-- `02_itt_avenida_ciudad_de_cali.ipynb` sigue siendo la principal deuda de migracion metodologica.
+- `caminabilidad_roosevelt_v2.ipynb` es el notebook de referencia principal
+  (corredor con buffer + territorios espejo Calle 5/7).
+- `caminabilidad_barrio_obrero_v2.ipynb` replica esa estructura para un polígono único
+  de barrio, sin territorio espejo, con censo arbóreo como indicador adicional.
+- `ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb` es un ejemplo externo de ITT; no forma
+  parte del pipeline de caminabilidad.
