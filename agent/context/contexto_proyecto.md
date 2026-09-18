@@ -109,6 +109,12 @@ La Celda 4 del notebook (y el script) leen el polígono directamente desde
 sin descomprimir la carpeta. El polígono vigente tiene 37.73 ha (reemplazó a uno previo
 de 7.47 ha); los eventos en `nueva_data/` fueron filtrados contra el polígono anterior.
 
+## Regla de informes PDF
+
+- En los informes PDF, el **texto de párrafos siempre debe ir justificado** (alineado a
+  ambos márgenes), no alineado solo a la izquierda.
+- El generador de referencia es `notebooks_py/generar_informe_barrio_obrero.py`.
+
 ## Regla de sincronización
 
 Cada vez que se modifique un notebook, actualizar también en el mismo cambio:
