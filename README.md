@@ -165,6 +165,7 @@ adaptada a un **polígono único de barrio** (sin sección de territorio espejo)
 + Gráficos base: red peatonal HD, heatmap de intersecciones (2 paneles: borde del
   polígono y con ejes viales IDESC de fondo), histograma/boxplot de segmentos,
   scatter de conectividad, tabla resumen de métricas
+14B. Gráfica de métricas de caminabilidad de la zona (panel de 5 métricas)
 
 ---
 
