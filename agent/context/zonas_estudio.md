@@ -74,6 +74,12 @@ re-filtrado contra el nuevo polígono está pendiente si se requiere exactitud e
 - Celda 14B: panel de las 5 métricas de caminabilidad de la zona.
 - Celda 14C: comparación Barrio Obrero vs Comuna 9 (descarga red OSM de la comuna, tabla,
   gráfica y CSV `comparacion_barrio_obrero_vs_comuna9.csv`).
+- Celda 14D: **Índice de Caminabilidad (0–100)**. Normaliza 3 indicadores con `ref_min/ref_max`
+  fijos (no min-max relativo) y los pondera. Referencias: densidad de intersecciones
+  (100–800, directo), densidad de calle (20–90, directo), longitud de segmento (40–150,
+  inverso). Pesos por defecto 0.45 / 0.35 / 0.20 (configurables en `PESOS`). Resultado:
+  Barrio Obrero **78.7** vs Comuna 9 **92.7**. Exporta
+  `indice_caminabilidad_barrio_obrero_vs_comuna9.csv`.
 
 ### Comparación caminabilidad — Barrio Obrero vs Comuna 9
 

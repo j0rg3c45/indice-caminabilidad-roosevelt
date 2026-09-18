@@ -121,6 +121,32 @@ de 7.47 ha); los eventos en `nueva_data/` fueron filtrados contra el polígono a
 - Generador de referencia (Word): `notebooks_py/generar_informe_barrio_obrero_docx.py`.
 - Generador alternativo (PDF, texto justificado por medición de anchos): `notebooks_py/generar_informe_barrio_obrero.py`.
 
+## Índice de Caminabilidad (0–100) — metodología
+
+Implementado en la Celda 14D del notebook de Barrio Obrero. Combina 3 indicadores de la
+red peatonal OSM en un valor único de 0 a 100, comparando Barrio Obrero con la Comuna 9.
+
+Pasos:
+1. **Normalización con referencias fijas** (`ref_min`/`ref_max`), NO min-max relativo, para
+   que el índice sea estable y comparable en el tiempo. Fórmula:
+   `score = 100 * (valor - ref_min) / (ref_max - ref_min)`, recortado a [0, 100].
+   Para indicadores inversos: `score = 100 * (ref_max - valor) / (ref_max - ref_min)`.
+2. **Indicadores y umbrales:**
+   - Densidad de intersecciones: `ref_min=100`, `ref_max=800` int/km² (directo).
+     100 = umbral salud pública (IPEN/U. Melbourne); ~800 ≈ trama muy densa (US EPA EnviroAtlas).
+   - Densidad de calle: `ref_min=20`, `ref_max=90` km/km² (directo).
+   - Longitud promedio de segmento: `ref_min=40`, `ref_max=150` m (inverso; cuadras cortas mejor).
+3. **Ponderación** (pesos configurables en `PESOS`, deben sumar 1.0). Por defecto:
+   intersecciones 0.45 · densidad de calle 0.35 · segmento 0.20.
+4. **Salida:** índice por zona, tabla, gráfica (scores por indicador + índice final) y CSV
+   `outputs/results/indice_caminabilidad_barrio_obrero_vs_comuna9.csv`.
+
+Resultado de línea base: Barrio Obrero **78.7** vs Comuna 9 **92.7** (ambos altos; la Comuna 9
+mejor sobre todo por su mayor densidad de intersecciones).
+
+Los umbrales y pesos son ajustables por criterio del equipo; documentar siempre la fuente
+de cada umbral. Distinguir: valor observado, score normalizado e índice ponderado.
+
 ## Regla de sincronización
 
 Cada vez que se modifique un notebook, actualizar también en el mismo cambio:

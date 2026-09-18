@@ -168,6 +168,7 @@ adaptada a un **polígono único de barrio** (sin sección de territorio espejo)
   umbrales de referencia), tabla resumen de métricas
 14B. Gráfica de métricas de caminabilidad de la zona (panel de 5 métricas)
 14C. Comparación Barrio Obrero vs Comuna 9 (descarga red OSM de la comuna, tabla + gráfica + CSV)
+14D. Índice de Caminabilidad 0–100 (normalización con ref_min/ref_max fijos, pesos configurables, tabla + gráfica + CSV)
 
 ---
 
