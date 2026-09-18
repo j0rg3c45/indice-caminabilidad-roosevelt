@@ -39,3 +39,6 @@ data/**/*.geojson
 data/**/*.qmd
 data/**/*.kmz
 data/**/*.lock
+
+# Archivos temporales de Office (Word/Excel abiertos)
+~$*

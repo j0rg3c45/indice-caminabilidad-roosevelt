@@ -109,11 +109,17 @@ La Celda 4 del notebook (y el script) leen el polígono directamente desde
 sin descomprimir la carpeta. El polígono vigente tiene 37.73 ha (reemplazó a uno previo
 de 7.47 ha); los eventos en `nueva_data/` fueron filtrados contra el polígono anterior.
 
-## Regla de informes PDF
+## Regla de informes
 
-- En los informes PDF, el **texto de párrafos siempre debe ir justificado** (alineado a
-  ambos márgenes), no alineado solo a la izquierda.
-- El generador de referencia es `notebooks_py/generar_informe_barrio_obrero.py`.
+- Formato preferido: **Word (.docx)** con `python-docx`, para que el usuario pueda editarlo
+  y porque la justificación de texto es nativa (evita el problema de matplotlib al justificar).
+- El **texto de párrafos siempre debe ir justificado** a ambos márgenes.
+- Cada sección debe incluir un **breve texto explicativo** de lo que muestra y por qué importa,
+  con tono **profesional y amable**.
+- Se excluye la sección de indicadores complementarios (eventos) por no ser relevante para
+  el análisis de caminabilidad.
+- Generador de referencia (Word): `notebooks_py/generar_informe_barrio_obrero_docx.py`.
+- Generador alternativo (PDF, texto justificado por medición de anchos): `notebooks_py/generar_informe_barrio_obrero.py`.
 
 ## Regla de sincronización
 
