@@ -65,6 +65,28 @@ segmento, densidad de calle (km/km²) y densidad de intersecciones (int/km²).
 - Google tiles en Folium: `http://{s}.google.com/vt/lyrs=...` con `subdomains=['mt0','mt1','mt2','mt3']`.
 - Silenciar warnings de pyogrio: `logging.getLogger('pyogrio').setLevel(logging.ERROR)`.
 
+## Mapa interactivo de referencia (Celda 9) — patrón reutilizable
+
+El mapa interactivo de la Celda 9 (notebook de Barrio Obrero) es el patrón recomendado
+para visualización en Folium en este proyecto. Estructura:
+
+- Base: `folium.Map(location=[centroid.y, centroid.x], zoom_start=16, tiles=None)`
+  centrado en el centroide del polígono (todo en WGS84).
+- Capas base alternables (`overlay=False`): CartoDB Claro, OpenStreetMap, Esri Satélite,
+  Google Streets y Google Satélite (Google con `subdomains=['mt0','mt1','mt2','mt3']`).
+- Polígono de la zona con `folium.GeoJson` + `style_function` (borde azul, relleno tenue).
+- Red peatonal OSM como líneas (`ox.graph_to_gdfs(G, edges=True)` reproyectado a WGS84).
+- Nodos (intersecciones) como `CircleMarker` rojos en un `FeatureGroup` propio.
+- **Capa de mapa de calor** de intersecciones con `folium.plugins.HeatMap`
+  (`radius=18, blur=15, min_opacity=0.3`) en un `FeatureGroup` apagado por defecto,
+  activable desde el control de capas. Se alimenta de las intersecciones (`street_count > 2`).
+- Capas de eventos (comparendos, hurtos, etc.) como `FeatureGroup` apagados (`show=False`),
+  con colores por dataset.
+- `folium.LayerControl()` al final para alternar todas las capas.
+
+Cada capa de superposición vive en su propio `FeatureGroup` para poder encenderse/apagarse
+de forma independiente. Este patrón se puede replicar en otras zonas y notebooks.
+
 ## Datos versionados
 
 Convención del `.gitignore`: en `data/` solo se versionan `.zip` y archivos pequeños;
