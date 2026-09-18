@@ -157,8 +157,8 @@ adaptada a un **polígono único de barrio** (sin sección de territorio espejo)
 6. Cálculo de métricas + exportación red peatonal como GeoJSON
 7. Carga de datasets complementarios: comparendos, homicidios, hurtos, VIF, censo arbóreo
 8. Mapa estático de la red peatonal
-9. Mapa interactivo (Esri/Google + red peatonal OSM + nodos + capa de mapa de calor de
-   intersecciones + capas de datos)
+9. Mapa interactivo (Esri/Google + polígono + tramo (eje) + red peatonal OSM + nodos +
+   capa de mapa de calor de intersecciones + capas de datos)
 10. Indicadores complementarios (total + densidad/ha)
 10B. Gráfico de barras de indicadores complementarios
 11. Exportación de resultados a CSV

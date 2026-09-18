@@ -101,8 +101,9 @@ El polígono viene en CRS `ESRI:103599` (MAGNA-SIRGAS CMT12) y se reproyecta a W
 
 | Archivo | Descripción |
 |---------|-------------|
-| Geojson_Barrio_Obrero.zip | Polígono del barrio (fuente versionada; se lee con `zip://`) |
+| Geojson_Barrio_Obrero.zip | Fuente versionada de la zona (polígono, tramo, eventos, red peatonal) |
 | Geojson_Barrio_Obrero.geojson | Polígono descomprimido (respaldo) |
+| tramo_Barrio_obrero.geojson | Tramo/eje del barrio (~553 m); capa de línea en el mapa interactivo |
 | red_peatonal_osm_barrio_obrero.geojson | Red peatonal OSM (simplify=False) |
 | nueva_data/.../DATIC_comparendos_2023_2026T1_*.geojson | Comparendos de tránsito |
 | nueva_data/.../DATIC_homicidios_2023_2026T1_*.geojson | Homicidios |
