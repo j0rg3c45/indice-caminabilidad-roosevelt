@@ -38,7 +38,9 @@ segmento, densidad de calle (km/km²) y densidad de intersecciones (int/km²).
   (Calle 5 y Calle 7).
 - `notebooks/caminabilidad_barrio_obrero_v2.ipynb`: replica la lógica de Roosevelt
   adaptada a polígono único de barrio, sin sección de territorio espejo. Incluye censo
-  arbóreo como indicador complementario.
+  arbóreo como indicador complementario. Añadidos: celda de glosario, capa de tramo/eje y
+  mapa de calor en el mapa interactivo, heatmap con ejes viales IDESC de fondo, comparación
+  con la Comuna 9 (contexto territorial) y contexto internacional en el Gráfico 5.
 - `notebooks/ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb`: notebook de referencia externo
   (ejemplo ITT), no forma parte del pipeline de caminabilidad.
 

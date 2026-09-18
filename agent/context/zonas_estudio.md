@@ -57,6 +57,44 @@ El polígono se carga directamente desde `data/Geojson_Barrio_Obrero/Geojson_Bar
 los eventos en `nueva_data/` fueron filtrados contra el polígono anterior, por lo que un
 re-filtrado contra el nuevo polígono está pendiente si se requiere exactitud en conteos.
 
+### Estructura actual del notebook de Barrio Obrero
+
+- Celda de **glosario** al inicio (siglas y unidades: int/km², km/km², CRS, OSM, IDESC, etc.).
+- Celda 4 carga el polígono desde el ZIP (`zip://`).
+- Celda 9 (mapa interactivo): incluye polígono, **tramo/eje** (`tramo_Barrio_obrero.geojson`,
+  ~553 m), red peatonal OSM, nodos, **capa de mapa de calor** de intersecciones (HeatMap) y
+  capas de eventos; todo activable desde el control de capas.
+- Gráfico 2: heatmap KDE de intersecciones en 2 paneles (borde del polígono y con **ejes
+  viales IDESC** de fondo).
+- Gráfico 5 (posición morfológica): compara Barrio Obrero vs **Comuna 9** en el scatter
+  (longitud de segmento vs densidad de intersecciones), con bandas de referencia
+  (400–700 int/km²) y umbral de salud pública (~100 int/km²). Incluye una celda markdown con
+  contexto internacional/nacional y referencias (US EPA EnviroAtlas, IPEN/U. Melbourne,
+  Queensland, Stangl 2015).
+- Celda 14B: panel de las 5 métricas de caminabilidad de la zona.
+- Celda 14C: comparación Barrio Obrero vs Comuna 9 (descarga red OSM de la comuna, tabla,
+  gráfica y CSV `comparacion_barrio_obrero_vs_comuna9.csv`).
+
+### Comparación caminabilidad — Barrio Obrero vs Comuna 9
+
+| Métrica | Barrio Obrero | Comuna 9 |
+|---|---|---|
+| Área (ha) | 37.73 | 290.38 |
+| Intersecciones | 233 | 2.255 |
+| Longitud red (km) | 26.93 | 227.52 |
+| Long. prom. segmento (m) | 41.6 | 34.8 |
+| Densidad calle (km/km²) | 71.38 | 78.35 |
+| Densidad intersecciones (int/km²) | 617 | 777 |
+
+Las densidades (km/km², int/km²) son las métricas comparables entre zonas de distinto tamaño.
+Barrio Obrero y la Comuna 9 están por encima del umbral de salud pública (~100 int/km²).
+
+### Capas base de Cali (IDESC)
+
+`data/GeoJson_IDESC.zip` — barrios (339), comunas (22), nomenclatura vial (11.295), en
+EPSG:6249. Se usan para extraer el polígono de la Comuna 9 (comparación) y como contexto
+en los mapas/gráficos.
+
 ## Notas de comparabilidad
 
 - Roosevelt y Barrio Obrero usan la misma metodología de caminabilidad (red peatonal
