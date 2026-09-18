@@ -30,10 +30,12 @@ indice-caminabilidad-roosevelt/
 │           ├── Geojson_Roosevelt/    # GeoJSON (input principal del notebook)
 │           └── shape_Roosevelt/      # Shapefiles equivalentes
 ├── notebooks/
-│   ├── caminabilidad_roosevelt_v2.ipynb    # Notebook principal
+│   ├── caminabilidad_roosevelt_v2.ipynb    # Notebook principal (Roosevelt)
+│   ├── caminabilidad_barrio_obrero_v2.ipynb  # Notebook Barrio Obrero
 │   └── ejemplo_04_itt_pulmon_oriente_2026_v2.ipynb  # Referencia ITT
 ├── notebooks_py/
-│   └── caminabilidad_roosevelt.py          # Script modular
+│   ├── caminabilidad_roosevelt.py          # Script modular Roosevelt
+│   └── caminabilidad_barrio_obrero.py      # Script modular Barrio Obrero
 ├── agent/
 │   ├── context/                      # Contexto del agente
 │   ├── knowledge_base/               # Base de conocimiento
@@ -91,9 +93,27 @@ Ubicación: `data/Informacion_espejo/geojson_espejo_poligonos/`
 | calle_5_linea.geojson | Eje del corredor — Calle 5 |
 | calle_7_area_Espejo_Bf100.geojson | Polígono buffer 100m — Calle 7 |
 
+### Zona Barrio Obrero
+Ubicación: `data/Geojson_Barrio_Obrero/`
+
+Unidad de análisis: **polígono único de barrio** (no corredor, no territorio espejo).
+El polígono viene en CRS `ESRI:103599` (MAGNA-SIRGAS CMT12) y se reproyecta a WGS84 al cargar.
+
+| Archivo | Descripción |
+|---------|-------------|
+| Geojson_Barrio_Obrero.geojson | Polígono del barrio (unidad de análisis) |
+| red_peatonal_osm_barrio_obrero.geojson | Red peatonal OSM (simplify=False) |
+| nueva_data/.../DATIC_comparendos_2023_2026T1_*.geojson | Comparendos de tránsito |
+| nueva_data/.../DATIC_homicidios_2023_2026T1_*.geojson | Homicidios |
+| nueva_data/.../DATIC_hurtos_2023_2026T1_*.geojson | Hurtos |
+| nueva_data/.../DATIC_violencia_intrafamiliar_2023_2026T1_*.geojson | Violencia intrafamiliar |
+| nueva_data/.../CENSO_ARBOREO_*.geojson | Censo arbóreo |
+
 ---
 
-## 5. Métricas de Línea Base (11 mayo 2026)
+## 5. Métricas de Línea Base
+
+### Roosevelt (11 mayo 2026)
 
 | Indicador | Valor |
 |-----------|-------|
@@ -104,6 +124,22 @@ Ubicación: `data/Informacion_espejo/geojson_espejo_poligonos/`
 | Densidad de calle | 74.07 km/km² |
 | Nodos OSM | 246 |
 | Segmentos OSM | 762 |
+
+### Barrio Obrero (18 septiembre 2026)
+
+| Indicador | Valor |
+|-----------|-------|
+| Área del polígono | 7.47 ha (74,692 m²) |
+| Intersecciones peatonales | 26 |
+| Longitud red peatonal | 3.6 km |
+| Longitud promedio segmento | 54.6 m |
+| Densidad de calle | 48.26 km/km² |
+| Densidad de intersecciones | 348 int/km² |
+| Nodos OSM | 26 |
+| Segmentos OSM | 66 |
+
+Eventos complementarios (2023–2026 T1): comparendos 3.741, hurtos 663,
+violencia intrafamiliar 82, homicidios 27, censo arbóreo 874.
 
 Fuente: OpenStreetMap via OSMnx (network_type='walk')
 
@@ -205,6 +241,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 | `1f95475` | Capa de tramos Roosevelt (eje) en mapa |
 | `34d6505` | Red peatonal OSM en mapa interactivo + export GeoJSON |
 | *(pending)* | Polígonos espejo migrados de .shp a GeoJSON nativo |
+| *(pending)* | Notebook + script de caminabilidad para Barrio Obrero (polígono único, sin espejo) |
 
 ---
 

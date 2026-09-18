@@ -41,12 +41,17 @@ Este repositorio contiene el pipeline de análisis para:
 │   ├── raw/                          # Copias de trabajo
 │   ├── processed/                    # Datos procesados
 │   ├── external/                     # Parámetros territorio espejo
-│   └── itt_roosevelt/Roosevelt/
-│       └── Geojson_Roosevelt/        # GeoJSON fuente (input principal)
+│   ├── itt_roosevelt/Roosevelt/
+│   │   └── Geojson_Roosevelt/        # GeoJSON fuente Roosevelt (input principal)
+│   └── Geojson_Barrio_Obrero/        # GeoJSON fuente Barrio Obrero
+│       ├── Geojson_Barrio_Obrero.geojson       # Polígono del barrio
+│       └── nueva_data/geojson_filtrado_.../    # Eventos filtrados al polígono
 ├── notebooks/
-│   └── caminabilidad_roosevelt_v2.ipynb  # Notebook principal
+│   ├── caminabilidad_roosevelt_v2.ipynb      # Notebook principal (Roosevelt)
+│   └── caminabilidad_barrio_obrero_v2.ipynb  # Notebook Barrio Obrero
 ├── notebooks_py/
-│   └── caminabilidad_roosevelt.py        # Script modular
+│   ├── caminabilidad_roosevelt.py            # Script modular Roosevelt
+│   └── caminabilidad_barrio_obrero.py        # Script modular Barrio Obrero
 ├── agent/
 │   ├── context/                      # Contexto del agente
 │   ├── knowledge_base/               # Base de conocimiento
@@ -80,8 +85,11 @@ uv venv
 .venv\Scripts\activate
 uv pip install -r requirements.txt
 
-# Pipeline completo (red peatonal + métricas + mapa)
+# Pipeline completo Roosevelt (red peatonal + métricas + mapa)
 uv run notebooks_py/caminabilidad_roosevelt.py
+
+# Pipeline completo Barrio Obrero (red peatonal + métricas + eventos + mapa)
+uv run notebooks_py/caminabilidad_barrio_obrero.py
 
 # Solo descargar la red peatonal como GeoJSON
 uv run notebooks_py/descargar_red_peatonal.py
@@ -89,7 +97,16 @@ uv run notebooks_py/descargar_red_peatonal.py
 
 ---
 
-## Pipeline del Notebook
+## Zonas de Análisis
+
+| Zona | Unidad de análisis | Notebook | Territorio espejo |
+|------|--------------------|----------|-------------------|
+| Av. Roosevelt | Corredor con buffer 100 m | `caminabilidad_roosevelt_v2.ipynb` | Sí (Calle 5, Calle 7) |
+| Barrio Obrero | Polígono único de barrio | `caminabilidad_barrio_obrero_v2.ipynb` | No |
+
+---
+
+## Pipeline del Notebook Roosevelt
 
 1. Instalación de dependencias
 2. Configuración de CRS (WGS84 trabajo / EPSG:3116 cálculos)
@@ -117,6 +134,7 @@ uv run notebooks_py/descargar_red_peatonal.py
 | Script | Comando | Descripción |
 |--------|---------|-------------|
 | `caminabilidad_roosevelt.py` | `uv run notebooks_py/caminabilidad_roosevelt.py` | Pipeline completo Roosevelt: red peatonal + métricas + mapa |
+| `caminabilidad_barrio_obrero.py` | `uv run notebooks_py/caminabilidad_barrio_obrero.py` | Pipeline completo Barrio Obrero: red peatonal + métricas + eventos + mapa |
 | `descargar_red_peatonal.py` | `uv run notebooks_py/descargar_red_peatonal.py` | Solo descarga red peatonal y guarda GeoJSON |
 | `graficos_base_caminabilidad.py` | `uv run notebooks_py/graficos_base_caminabilidad.py` | 6 gráficos base de caminabilidad |
 | `caminabilidad_espejo.py` | `uv run notebooks_py/caminabilidad_espejo.py` | Caminabilidad territorios espejo + comparación vs Roosevelt |
@@ -126,7 +144,29 @@ uv run notebooks_py/descargar_red_peatonal.py
 
 ---
 
-## Métricas de Línea Base (11 mayo 2026)
+## Pipeline del Notebook Barrio Obrero
+
+El notebook `caminabilidad_barrio_obrero_v2.ipynb` replica la lógica de Roosevelt
+adaptada a un **polígono único de barrio** (sin sección de territorio espejo):
+
+1. Instalación de dependencias
+2. Configuración de CRS (WGS84 trabajo / EPSG:3116 cálculos)
+3. Detección de entorno (Colab / local) y carga de datos
+4. Carga del polígono del barrio + validación/reproyección a WGS84 (origen ESRI:103599)
+5. Descarga de red peatonal desde OpenStreetMap (simplify=False)
+6. Cálculo de métricas + exportación red peatonal como GeoJSON
+7. Carga de datasets complementarios: comparendos, homicidios, hurtos, VIF, censo arbóreo
+8. Mapa estático de la red peatonal
+9. Mapa interactivo (Esri/Google + red peatonal OSM + nodos + capas de datos)
+10. Indicadores complementarios (total + densidad/ha)
+10B. Gráfico de barras de indicadores complementarios
+11. Exportación de resultados a CSV
++ Gráficos base: red peatonal HD, heatmap intersecciones, histograma/boxplot de
+  segmentos, scatter de conectividad, tabla resumen de métricas
+
+---
+
+## Métricas de Línea Base — Roosevelt (11 mayo 2026)
 
 | Indicador | Valor |
 |-----------|-------|
@@ -135,6 +175,20 @@ uv run notebooks_py/descargar_red_peatonal.py
 | Longitud red peatonal | 31.78 km |
 | Longitud promedio segmento | 41.7 m |
 | Densidad de calle | 74.07 km/km² |
+
+## Métricas de Línea Base — Barrio Obrero (18 sep 2026)
+
+| Indicador | Valor |
+|-----------|-------|
+| Área del polígono | 7.47 ha |
+| Intersecciones peatonales | 26 |
+| Longitud red peatonal | 3.6 km |
+| Longitud promedio segmento | 54.6 m |
+| Densidad de calle | 48.26 km/km² |
+| Densidad de intersecciones | 348 int/km² |
+
+**Eventos complementarios (2023–2026 T1):** comparendos 3.741, hurtos 663,
+violencia intrafamiliar 82, homicidios 27, censo arbóreo 874.
 
 ---
 
