@@ -166,6 +166,7 @@ adaptada a un **polígono único de barrio** (sin sección de territorio espejo)
   polígono y con ejes viales IDESC de fondo), histograma/boxplot de segmentos,
   scatter de conectividad, tabla resumen de métricas
 14B. Gráfica de métricas de caminabilidad de la zona (panel de 5 métricas)
+14C. Comparación Barrio Obrero vs Comuna 9 (descarga red OSM de la comuna, tabla + gráfica + CSV)
 
 ---
 
