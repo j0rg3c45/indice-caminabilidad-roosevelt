@@ -79,6 +79,13 @@ los `.geojson`, `.shp`, `.qmd`, `.kmz` crudos están ignorados.
 - Barrio Obrero: `data/Geojson_Barrio_Obrero.zip` + carpeta de trabajo descomprimida.
 - Polígonos espejo: `data/Informacion_espejo/geojson_espejo_poligonos.zip`.
 - Datos filtrados espejo: `data/processed/Filtro_Calle_5/` y `data/processed/Filtro_Calle_7/`.
+- Capas base de Cali (IDESC): `data/GeoJson_IDESC.zip` — barrios, comunas y nomenclatura
+  vial (EPSG:6249, normalizar a WGS84).
+
+El polígono de Barrio Obrero se lee directamente desde su ZIP
+(`data/Geojson_Barrio_Obrero/Geojson_Barrio_Obrero.zip`) con el prefijo `zip://`.
+El polígono vigente es de 37.73 ha (reemplazó a uno previo de 7.47 ha); los eventos en
+`nueva_data/` fueron filtrados contra el polígono anterior.
 
 ## 7. Entorno de ejecución
 

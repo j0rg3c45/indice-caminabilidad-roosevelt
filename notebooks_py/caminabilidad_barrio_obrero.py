@@ -39,8 +39,15 @@ GEOJSON_DIR = PROJECT_ROOT / "data" / "Geojson_Barrio_Obrero"
 # Carpeta de eventos complementarios filtrados al polígono
 EVENTOS_DIR = GEOJSON_DIR / "nueva_data" / "geojson_filtrado_poligono_Barrio_Obrero"
 
-# Polígono por defecto (unidad de análisis: barrio)
-DEFAULT_GEOJSON = GEOJSON_DIR / "Geojson_Barrio_Obrero.geojson"
+# Polígono por defecto (unidad de análisis: barrio).
+# Se lee directamente desde el ZIP versionado con el prefijo zip:// (geopandas/fiona),
+# sin necesidad de descomprimir la carpeta. Respaldo: .geojson descomprimido.
+ZIP_POLIGONO = GEOJSON_DIR / "Geojson_Barrio_Obrero.zip"
+GEOJSON_EN_ZIP = "Geojson_Barrio_Obrero.geojson"
+if ZIP_POLIGONO.exists():
+    DEFAULT_GEOJSON = f"zip://{ZIP_POLIGONO.as_posix()}!{GEOJSON_EN_ZIP}"
+else:
+    DEFAULT_GEOJSON = str(GEOJSON_DIR / "Geojson_Barrio_Obrero.geojson")
 
 # Salidas
 RESULTS_DIR = PROJECT_ROOT / "outputs" / "results"

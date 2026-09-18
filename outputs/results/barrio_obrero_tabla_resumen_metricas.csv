@@ -1,11 +1,11 @@
 Métrica,Valor
-Área total (ha),7.47
-Área total (km²),0.0747
-Intersecciones peatonales,26.0
-Longitud total de red (km),3.6
-Longitud promedio segmento (m),54.6
-Mediana segmento (m),78.3
-Densidad de calle (km/km²),48.26
-Densidad de intersecciones (int/km²),348.0
-Nodos OSM,26.0
-Segmentos OSM,66.0
+Área total (ha),37.73
+Área total (km²),0.3773
+Intersecciones peatonales,233.0
+Longitud total de red (km),26.93
+Longitud promedio segmento (m),41.6
+Mediana segmento (m),16.7
+Densidad de calle (km/km²),71.38
+Densidad de intersecciones (int/km²),617.0
+Nodos OSM,233.0
+Segmentos OSM,648.0

@@ -101,13 +101,26 @@ El polígono viene en CRS `ESRI:103599` (MAGNA-SIRGAS CMT12) y se reproyecta a W
 
 | Archivo | Descripción |
 |---------|-------------|
-| Geojson_Barrio_Obrero.geojson | Polígono del barrio (unidad de análisis) |
+| Geojson_Barrio_Obrero.zip | Polígono del barrio (fuente versionada; se lee con `zip://`) |
+| Geojson_Barrio_Obrero.geojson | Polígono descomprimido (respaldo) |
 | red_peatonal_osm_barrio_obrero.geojson | Red peatonal OSM (simplify=False) |
 | nueva_data/.../DATIC_comparendos_2023_2026T1_*.geojson | Comparendos de tránsito |
 | nueva_data/.../DATIC_homicidios_2023_2026T1_*.geojson | Homicidios |
 | nueva_data/.../DATIC_hurtos_2023_2026T1_*.geojson | Hurtos |
 | nueva_data/.../DATIC_violencia_intrafamiliar_2023_2026T1_*.geojson | Violencia intrafamiliar |
 | nueva_data/.../CENSO_ARBOREO_*.geojson | Censo arbóreo |
+
+### Capas base de Cali (IDESC)
+Ubicación: `data/GeoJson_IDESC.zip` (fuente IDESC, CRS EPSG:6249 → normalizar a WGS84).
+
+| Capa | Registros | Geometría | Descripción |
+|------|-----------|-----------|-------------|
+| barrios.geojson | 339 | MultiPolygon | Polígonos de barrios de Cali (`id_barrio`, `barrio`) |
+| comunas.geojson | 22 | MultiPolygon | Polígonos de comunas (`comuna`, `nombre`) |
+| nomenclatura_vial.geojson | 11.295 | MultiLineString | Malla vial oficial (`nvtipovia`, `nvclasevia`) |
+
+Uso previsto: contexto y delimitación de zonas (extraer polígonos de barrio/comuna),
+capas de referencia en los mapas y validación de la malla vial.
 
 ---
 
@@ -129,14 +142,17 @@ El polígono viene en CRS `ESRI:103599` (MAGNA-SIRGAS CMT12) y se reproyecta a W
 
 | Indicador | Valor |
 |-----------|-------|
-| Área del polígono | 7.47 ha (74,692 m²) |
-| Intersecciones peatonales | 26 |
-| Longitud red peatonal | 3.6 km |
-| Longitud promedio segmento | 54.6 m |
-| Densidad de calle | 48.26 km/km² |
-| Densidad de intersecciones | 348 int/km² |
-| Nodos OSM | 26 |
-| Segmentos OSM | 66 |
+| Área del polígono | 37.73 ha (377,329 m²) |
+| Intersecciones peatonales | 233 |
+| Longitud red peatonal | 26.93 km |
+| Longitud promedio segmento | 41.6 m |
+| Densidad de calle | 71.38 km/km² |
+| Densidad de intersecciones | 618 int/km² |
+| Nodos OSM | 233 |
+| Segmentos OSM | 648 |
+
+El polígono se carga directamente desde `data/Geojson_Barrio_Obrero/Geojson_Barrio_Obrero.zip`
+(prefijo `zip://`, sin descomprimir la carpeta).
 
 Eventos complementarios (2023–2026 T1): comparendos 3.741, hurtos 663,
 violencia intrafamiliar 82, homicidios 27, censo arbóreo 874.

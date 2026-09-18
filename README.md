@@ -180,15 +180,19 @@ adaptada a un **polígono único de barrio** (sin sección de territorio espejo)
 
 | Indicador | Valor |
 |-----------|-------|
-| Área del polígono | 7.47 ha |
-| Intersecciones peatonales | 26 |
-| Longitud red peatonal | 3.6 km |
-| Longitud promedio segmento | 54.6 m |
-| Densidad de calle | 48.26 km/km² |
-| Densidad de intersecciones | 348 int/km² |
+| Área del polígono | 37.73 ha |
+| Intersecciones peatonales | 233 |
+| Longitud red peatonal | 26.93 km |
+| Longitud promedio segmento | 41.6 m |
+| Densidad de calle | 71.38 km/km² |
+| Densidad de intersecciones | 618 int/km² |
 
 **Eventos complementarios (2023–2026 T1):** comparendos 3.741, hurtos 663,
 violencia intrafamiliar 82, homicidios 27, censo arbóreo 874.
+
+> El polígono de Barrio Obrero se carga directamente desde
+> `data/Geojson_Barrio_Obrero/Geojson_Barrio_Obrero.zip` (prefijo `zip://`), sin
+> necesidad de descomprimir la carpeta.
 
 ---
 
