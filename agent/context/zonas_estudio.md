@@ -108,3 +108,35 @@ en los mapas/gráficos.
   corredor con buffer vs polígono de barrio.
 - Las densidades (por hectárea, km/km², int/km²) permiten comparar zonas de tamaño
   diferente de forma normalizada.
+
+
+## Contexto de la malla vial de Cali (PIMU) — soporte documental
+
+Fuente para jerarquizar corredores y caracterizar el territorio (no es un benchmark de la
+red peatonal OSM; son magnitudes distintas).
+
+Malla vial **principal** de Cali (Documento Técnico de Soporte del PIMU):
+
+- Arterias primarias: 459,9 km (~45%)
+- Arterias secundarias: 306,6 km (~30%)
+- Vías colectoras: 245,28 km (~24%)
+- Total red vial principal: ≈ 1.011,78 km (~1.012 km)
+
+Salvedad técnica clave:
+
+- Ese ≈1.012 km es solo la **malla vial principal vehicular** (jerarquía superior), NO la
+  malla total. Sumando vías locales y barriales, la malla vial urbana total de Cali supera
+  los **2.600–2.800 km** lineales vehiculares.
+- La **red peatonal OSM** (OSMnx, simplify=False) es aún más densa porque cuenta andenes a
+  ambos costados, senderos, callejones y cruces que no están en el inventario vehicular formal.
+- Por tanto, los km de red peatonal de las zonas (Barrio Obrero 26.93 km; Comuna 9 227.52 km)
+  **no se comparan directamente** con los km del PIMU: distinta definición, escala y cobertura.
+
+Uso en el proyecto:
+
+- Soporte para jerarquizar corredores: Av. Roosevelt es vía arteria secundaria/colectora
+  según el tramo; Barrio Obrero se compone mayormente de vías locales/barriales.
+- Cita bibliográfica formal: Alcaldía de Santiago de Cali & Secretaría de Movilidad. (2018).
+  *Plan Integral de Movilidad Urbana de Santiago de Cali (PIMU) — Documento Técnico de Soporte
+  (DTS)*. Santiago de Cali, Colombia. Cap. Diagnóstico de la Malla Vial Principal.
+  (En el marco del POT — Acuerdo 0373 de 2014.)
