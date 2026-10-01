@@ -1,0 +1,4 @@
+# Solo necesitamos el handler y requirements en la imagen
+*
+!lambda_function.py
+!requirements.txt

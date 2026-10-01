@@ -1,0 +1,14 @@
+{
+  "zona_nombre": "Barrio Obrero",
+  "bucket": "aca-prod-calitrack-sismo-cali",
+  "salida_prefix": "resultados/caminabilidad/barrio_obrero",
+  "eventos": {
+    "comparendos": "insumos/barrio_obrero/comparendos.geojson",
+    "hurtos": "insumos/barrio_obrero/hurtos.geojson",
+    "homicidios": "insumos/barrio_obrero/homicidios.geojson",
+    "vif": "insumos/barrio_obrero/vif.geojson",
+    "censo_arboreo": "insumos/barrio_obrero/censo_arboreo.geojson"
+  },
+  "poligono_s3_key": "insumos/barrio_obrero/poligono.geojson",
+  "tramo_s3_key": "insumos/barrio_obrero/tramo.geojson"
+}

@@ -22,6 +22,22 @@ completo). El perfil `default` solo tiene S3.
 ## Recursos conocidos
 
 - Bucket S3: `aca-prod-calitrack-sismo-cali`
+  - Insumos del Lambda de caminabilidad: `insumos/<zona_slug>/` (polígono, tramo, eventos, comuna9).
+  - Resultados: `resultados/caminabilidad/<zona_slug>/<fecha>/`.
+- Lambda / ECR (propuestos): `aca-prod-calitrack-caminabilidad`.
+
+## Lambda de Caminabilidad
+
+Código en `lambda/caminabilidad/` del repo:
+- `lambda_function.py` — handler que replica el notebook (polígono → red peatonal OSM →
+  métricas → índice 0–100 → mapa interactivo Celda 9 → salidas en S3).
+- `subir_insumos_s3.py` — sube los insumos a S3 y genera `evento_barrio_obrero.json`.
+- `Dockerfile`, `requirements.txt`, `.dockerignore` — empaquetado como imagen de contenedor
+  (geopandas/osmnx no caben en ZIP; se usa `public.ecr.aws/lambda/python:3.12`).
+- `README.md` — dependencias por capas y pasos de build/push/deploy/invoke.
+
+Requisitos del Lambda: memoria ~2048 MB, timeout ~600 s, `/tmp` 1024 MB y **salida a
+internet** (OSMnx consulta la API Overpass de OpenStreetMap).
 
 ## Cómo ingresar (comandos)
 
